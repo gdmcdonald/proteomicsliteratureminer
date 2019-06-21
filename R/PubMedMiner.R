@@ -17,6 +17,7 @@
 #' @return Generates an Excel file \code{output.file} with Pubmed query results using the UniProt identifers and keyword search in \code{query.file}.
 #' @examples
 #' pubmedMiner_entry(query.file="potential_marker.xlsx", output.file = "potential_marker_pubmed_results.xlsx")
+#' @export
 pubmedMiner_entry <- function(query.file, output.file = "pubmed_results.xlsx") {
 
 	#library(rentrez)
