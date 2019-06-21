@@ -31,8 +31,8 @@ pubmedMiner_entry <- function(potentialmarker, output.file = "pubmed_results.xls
    library(httr)
  	library(tm)
 
-	# dat.input = openxlsx::readWorkbook(query.file)
-	dat.input = potentialmarker
+	dat.input = openxlsx::readWorkbook('/Users/rvijay/SIH-WORK-2019/SHORT-PROJECTS/Example.xlsx')
+	# dat.input = potentialmarker
 
 	list.datquery = list()
 	list.datpubmed = list()
