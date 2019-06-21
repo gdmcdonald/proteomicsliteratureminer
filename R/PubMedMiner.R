@@ -23,13 +23,13 @@ pubmedMiner_entry <- function(potentialmarker, output.file = "pubmed_results.xls
 	#library(rentrez)
 
   ### Theese libraries will need to be commented when in package. no library() or no require()
-# 	library(RISmed)
-# 	library(wordcloud)
-# 	library(openxlsx)
+ 	library(RISmed)
+ 	library(wordcloud)
+ 	library(openxlsx)
 #
-#   library(cluster)
-#   library(httr)
-# 	library(tm)
+   library(cluster)
+   library(httr)
+ 	library(tm)
 
 	# dat.input = openxlsx::readWorkbook(query.file)
 	dat.input = potentialmarker
