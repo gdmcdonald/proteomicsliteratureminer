@@ -39,7 +39,7 @@ pubmedMiner_entry <- function(potentialmarker, output.file = "pubmed_results.xls
 
 	for(query.idx in 1:nrow(dat.input)) {
 		# Vijay - Is this cat needed
-	  #cat(paste('query.idx', query.idx))
+	  cat(paste('query.idx', query.idx))
 
 	  UniProtID = dat.input[query.idx, 'UniProtID']
 	  IDType = dat.input[query.idx, "IDType"]
