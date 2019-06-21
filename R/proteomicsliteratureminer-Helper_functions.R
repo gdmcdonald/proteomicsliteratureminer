@@ -273,7 +273,7 @@ mesh_clustering <- function(meshs,k=4, file='plot_dist_mesh.png') {
 		res[!idx.na] <- clusterID.cosine
 	}
 	# commented by VR
-	res
+	#res
 }
 
 # cosine similarity, cos(a,b) = a.b/norm(a)*norm(b)

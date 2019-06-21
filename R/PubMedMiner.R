@@ -10,15 +10,15 @@
 # source('pubmedMiner_entry.R')
 # res <- system.time(pubmedMiner_entry(query.file="potential_marker.xlsx", output.file = "potential_marker_pubmed_results.xlsx"))
 #####################################################################################################
-#' Generates a list of Pubmed query results.
+#' Generates a list of Pubmed results based on a UniProt ID and a user-defined keyword.
 #'
-#' @param query.file Path to the input  file having the UniProtID.
+#' @param potentialmarker R dataframe having 5 attributes, UniProtID, IDType, TaxID, Keyword, KeywordInTitleOnly.
 #' @param output.file Path to the output  file with the results of the Pubmed query.
 #' @return Generates an Excel file \code{output.file} with Pubmed query results using the UniProt identifers and keyword search in \code{query.file}.
 #' @examples
-#' pubmedMiner_entry(query.file="potential_marker.xlsx", output.file = "potential_marker_pubmed_results.xlsx")
+#' pubmedMiner_entry(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx")
 #' @export
-pubmedMiner_entry <- function(query.file, output.file = "pubmed_results.xlsx") {
+pubmedMiner_entry <- function(potentialmarker, output.file = "pubmed_results.xlsx") {
 
 	#library(rentrez)
 
@@ -31,13 +31,16 @@ pubmedMiner_entry <- function(query.file, output.file = "pubmed_results.xlsx") {
 #   library(httr)
 # 	library(tm)
 
-	dat.input = openxlsx::readWorkbook(query.file)
+	# dat.input = openxlsx::readWorkbook(query.file)
+	dat.input = potentialmarker
 
 	list.datquery = list()
 	list.datpubmed = list()
 
 	for(query.idx in 1:nrow(dat.input)) {
-		cat(paste('query.idx', query.idx))
+		# Vijay - Is this cat needed
+	  #cat(paste('query.idx', query.idx))
+
 	  UniProtID = dat.input[query.idx, 'UniProtID']
 	  IDType = dat.input[query.idx, "IDType"]
 		taxid = dat.input[query.idx, 'TaxID']

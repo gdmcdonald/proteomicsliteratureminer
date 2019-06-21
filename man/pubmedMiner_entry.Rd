@@ -2,12 +2,12 @@
 % Please edit documentation in R/PubMedMiner.R
 \name{pubmedMiner_entry}
 \alias{pubmedMiner_entry}
-\title{Generates a list of Pubmed query results.}
+\title{Generates a list of Pubmed results based on a UniProt ID and a user-defined keyword.}
 \usage{
-pubmedMiner_entry(query.file, output.file = "pubmed_results.xlsx")
+pubmedMiner_entry(potentialmarker, output.file = "pubmed_results.xlsx")
 }
 \arguments{
-\item{query.file}{Path to the input  file having the UniProtID.}
+\item{potentialmarker}{R dataframe having 5 attributes, UniProtID, IDType, TaxID, Keyword, KeywordInTitleOnly.}
 
 \item{output.file}{Path to the output  file with the results of the Pubmed query.}
 }
@@ -15,8 +15,8 @@ pubmedMiner_entry(query.file, output.file = "pubmed_results.xlsx")
 Generates an Excel file \code{output.file} with Pubmed query results using the UniProt identifers and keyword search in \code{query.file}.
 }
 \description{
-Generates a list of Pubmed query results.
+Generates a list of Pubmed results based on a UniProt ID and a user-defined keyword.
 }
 \examples{
-pubmedMiner_entry(query.file="potential_marker.xlsx", output.file = "potential_marker_pubmed_results.xlsx")
+pubmedMiner_entry(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx")
 }
