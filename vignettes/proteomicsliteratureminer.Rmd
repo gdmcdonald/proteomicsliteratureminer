@@ -1,0 +1,40 @@
+---
+title: "A short introduction to proteomicsliteratureminer package"
+author: "Mark P. Molloy"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Proteomics and genomics discovery experiments generate increasingly large result tables, necessitating more researcher time to covert data into knowledge. Literature review is an important step in this process and can be tedious for large scale experiments. An informed and strategic decision about which biomolecule targets should be pursued for follow-up experiements remains a challenge. The **proteomicsliteratureminer** package contains functions to streamline and automate the retrieval of literature from PubMed based on Uniprot identifiers and a user defined keyword search.
+
+Install **proteomicsliteratureminer** using
+```{r install, eval = FALSE}
+install_github("vrag7458/proteomicsliteratureminer")
+```
+
+The way of getting a Microsoft Excel file with the Pubmed publication corresponding to the UniProt identifiers is shown by an example below
+```{r proteomicsliteratureminer}
+library(proteomicsliteratureminer)
+pubmedMiner_entry(query.file = "potential_marker.xlsx", output.file = "potential_marker_pubmed_results.xlsx")
+```
+
+## Vignette Info
+To be filled.
+
+
+
+## Figures
+To be filled.
+
+
