@@ -15,9 +15,9 @@ pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1
 	dat.pubmed = "No pubmed results returned!"
 
 	if(!is.null(UniProtID)) {
-		#print("Getting uniprot synonyms ... ")
+		print("Getting uniprot synonyms ... ")
 		synonyms <- try(getUniprotSynonyms(UniProtID, IDType, taxid))
-		#print(synonyms)
+		print(synonyms)
 		if(!inherits(synonyms, "try-error")) {
 		  if(!is.null(synonyms)) {
 			vec.keyword=NA
