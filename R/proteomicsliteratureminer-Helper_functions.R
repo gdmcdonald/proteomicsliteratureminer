@@ -337,7 +337,7 @@ mesh_clustering <- function(meshs,k=4, file='plot_dist_mesh.png') {
   if(length(nna.meshs) > 10) {
 
     # pairwise distance matrix
-    d.cosine <- cluster::cosineDist(mat.mesh)
+    d.cosine <- cosineDist(mat.mesh)
 
 
     hc.cosine <- cluster::hclust(d.cosine , method="complete")
