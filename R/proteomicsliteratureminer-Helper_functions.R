@@ -264,7 +264,7 @@ abstract_clustering <- function(abstracts, method=c('hierarchical', 'kmeans'), k
   } else { #kmeans
 
   }
-  res
+  # res
 
 }
 
@@ -328,7 +328,7 @@ mesh_clustering <- function(meshs,k=4, file='plot_dist_mesh.png') {
 
     res[!idx.na] <- clusterID.cosine
   }
-  # res
+  res
 
 }
 
