@@ -218,9 +218,6 @@ plot_stats <- function(dat.pubmed, file='barplotNwordcloud.png') {
   # barplots of top 20 MeSH
 
   dev.off()
-
-
-
 }
 
 abstract_clustering <- function(abstracts, method=c('hierarchical', 'kmeans'), k=4) {
@@ -321,7 +318,7 @@ mesh_clustering <- function(meshs,k=4, file='plot_dist_mesh.png') {
 
     res[!idx.na] <- clusterID.cosine
   }
-  # res
+  res
 }
 
 # cosine similarity, cos(a,b) = a.b/norm(a)*norm(b)
