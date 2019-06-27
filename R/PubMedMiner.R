@@ -18,28 +18,15 @@
 #' @examples
 #' pubmedMiner_entry(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx")
 #' @export
-pubmedMiner_entry <- function(potentialmarker, output.file = "pubmed_results.xlsx") {
-
-	#library(rentrez)
-
-  ### Theese libraries will need to be commented when in package. no library() or no require()
- 	library(RISmed)
- 	library(wordcloud)
- 	library(openxlsx)
-#
-   library(cluster)
-   library(httr)
- 	library(tm)
-
-	dat.input = openxlsx::readWorkbook('/Users/rvijay/SIH-WORK-2019/SHORT-PROJECTS/Example.xlsx')
-	# dat.input = potentialmarker
+pubmedMiner_entry <- function(dat.input, output.file = "pubmed_results.xlsx") {
 
 	list.datquery = list()
 	list.datpubmed = list()
-
+	# create progress bar
+	pb <- txtProgressBar(min = 0, max = nrow(dat.input), style = 3)
+	
 	for(query.idx in 1:nrow(dat.input)) {
-		# Vijay - Is this cat needed
-	  cat(paste('query.idx', query.idx))
+		Sys.sleep(0.1)
 
 	  UniProtID = dat.input[query.idx, 'UniProtID']
 	  IDType = dat.input[query.idx, "IDType"]
@@ -61,6 +48,8 @@ pubmedMiner_entry <- function(potentialmarker, output.file = "pubmed_results.xls
 
 			list.datpubmed[[query.idx]] = 'No result'
 		}
+		# update progress bar
+		setTxtProgressBar(pb, query.idx)
 	}
 
 	all.datquery = do.call(rbind, list.datquery)
