@@ -1,12 +1,9 @@
-
-
 pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1) {
   fields = "TIAB"
 
   if(ti.only=="Yes") fields = "TI"
 
   fterm = paste('[', fields, ']', sep='')
-
 
   dat.query = data.frame('UniProtID'=UniProtID, 'IDType' = IDType, 'TaxID'=taxid, 'Synonyms' = NA,
     'Keywords' = keyword, 'KeywordInTitleOnly'=ti.only, 'TotalResults'=0,
@@ -16,13 +13,10 @@ pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1
 
   if(!is.null(UniProtID)) {
 
-
     synonyms <- try(getUniprotSynonyms(UniProtID, IDType, taxid))
-
 
     if(!inherits(synonyms, "try-error")) {
       if(!is.null(synonyms)) {
-
 
         vec.keyword=NA
         if(!is.na(keyword))
@@ -57,7 +51,6 @@ pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1
 
           dat.query$TotalResults = nrow(dat.pubmed)
 
-
           # category 0: no synonyms; 1: hits that have reviews has review; 2: hits but do not have reviews; 3: no hits
           dat.query$Category = 0
           if(length(synonyms) > 0) {
@@ -73,9 +66,7 @@ pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1
 
 
   list(dat.query=dat.query, dat.pubmed=dat.pubmed)
-
 }
-
 
 # get gene synonyms using Uniprot
 
@@ -90,7 +81,6 @@ getUniprotSynonyms <- function(UniProtID, IDType="Accession", taxid=9606) {
     query = paste("https://www.uniprot.org/uniprot/?query=gene:", UniProtID, '+organism:', taxid,
       '+reviewed:yes&columns=genes&format=tab', sep='') #added +reviewed:yes for only reviewed hits and accession instead of gene
   }
-
 
   uniprot.res = try(httr::GET(query))
 
@@ -109,14 +99,10 @@ getUniprotSynonyms <- function(UniProtID, IDType="Accession", taxid=9606) {
 
   res = gsub("\\;", "", res)
 
-
   as.vector(unique(res))
 }
 
-
-
 pubmed_summary <- function(synonyms, vec.keyword=NA, fields="TIAB") {
-
 
   fterm = paste('[', fields, ']', sep='')
   qkeyword = sapply(vec.keyword, function(x) paste0("\"",x,"\"") )
@@ -135,7 +121,6 @@ pubmed_summary <- function(synonyms, vec.keyword=NA, fields="TIAB") {
   pubres = RISmed::EUtilsSummary(pub_query, datetype="pdat")
 
   res.count = RISmed::QueryCount(pubres)
-
 
   list(pubres=pubres, res.count=res.count, pub.query=pub_query)
 }
@@ -193,7 +178,7 @@ pubmed_record <- function(pubres, vec.keyword=NA, synonyms=NULL, fields="TI") {
   # clean up
   dat.pubmed = dat.pubmed[!grepl('^\\[', dat.pubmed$Title),]
 
-  dat.pubmed
+  #dat.pubmed
 }
 
 
@@ -231,7 +216,6 @@ plot_stats <- function(dat.pubmed, file='barplotNwordcloud.png') {
   suppressWarnings({ wcl = try(wordcloud::wordcloud(all.abstract, max.words=200)) })
 
   # barplots of top 20 MeSH
-
 
   dev.off()
 
@@ -296,7 +280,6 @@ mesh_matrix <- function(v, u) { # v and u are two mesh terms
 # meshs is a vector of MeSH terms delimited by ','
 mesh_clustering <- function(meshs,k=4, file='plot_dist_mesh.png') {
 
-
   res <- rep(NA, length(meshs))
 
   idx.na = nchar(meshs)==0
@@ -339,9 +322,7 @@ mesh_clustering <- function(meshs,k=4, file='plot_dist_mesh.png') {
     # pairwise distance matrix
     d.cosine <- cosineDist(mat.mesh)
 
-
     hc.cosine <- hclust(d.cosine , method="complete")
-
 
     ct.cosine <- cutree(hc.cosine, k=k)
 
@@ -349,7 +330,7 @@ mesh_clustering <- function(meshs,k=4, file='plot_dist_mesh.png') {
 
     res[!idx.na] <- clusterID.cosine
   }
-  res
+  #res
 
 }
 
