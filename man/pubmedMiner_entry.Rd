@@ -4,10 +4,10 @@
 \alias{pubmedMiner_entry}
 \title{Generates a list of Pubmed results based on a UniProt ID and a user-defined keyword.}
 \usage{
-pubmedMiner_entry(potentialmarker, output.file = "pubmed_results.xlsx")
+pubmedMiner_entry(dat.input, output.file = "pubmed_results.xlsx")
 }
 \arguments{
-\item{potentialmarker}{R dataframe having 5 attributes, UniProtID, IDType, TaxID, Keyword, KeywordInTitleOnly.}
+\item{dat.input}{R dataframe having 5 attributes, UniProtID, IDType, TaxID, Keyword, KeywordInTitleOnly.}
 
 \item{output.file}{Path to the output  file with the results of the Pubmed query.}
 }

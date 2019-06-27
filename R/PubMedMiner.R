@@ -10,9 +10,10 @@ pubmedMiner_entry <- function(dat.input, output.file = "pubmed_results.xlsx") {
 
 	list.datquery = list()
 	list.datpubmed = list()
+
 	# create progress bar
 	pb <- txtProgressBar(min = 0, max = nrow(dat.input), style = 3)
-	
+
 	for(query.idx in 1:nrow(dat.input)) {
 		Sys.sleep(0.1)
 
@@ -51,7 +52,6 @@ pubmedMiner_entry <- function(dat.input, output.file = "pubmed_results.xlsx") {
 	writeData(wb,"query", all.datquery)
 
 	for(ii in 1:length(list.datpubmed) ) {
-
 		list.datquery[[ii]][is.na(list.datquery[[ii]])] = ''
 		openxlsx::addWorksheet(wb, sheetName=paste("pubmed result", ii) )
 		writeData(wb, paste("pubmed result", ii), list.datquery[[ii]])

@@ -8,7 +8,6 @@ pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1
 	dat.pubmed = "No pubmed results returned!"
 
 	if(!is.null(UniProtID)) {
-		
 		synonyms <- try(getUniprotSynonyms(UniProtID, IDType, taxid))
 
 		if(!inherits(synonyms, "try-error")) {
@@ -166,7 +165,7 @@ plot_stats <- function(dat.pubmed, file='barplotNwordcloud.png') {
 
 	# word cloud of abstracts
 	suppressWarnings({ wcl = try(wordcloud(all.abstract, max.words=200)) })
-	
+
 	# barplots of top 20 MeSH
 	dev.off()
 }
@@ -180,7 +179,7 @@ abstract_clustering <- function(abstracts, method=c('hierarchical', 'kmeans'), k
 	# abstract.corpus <- tm_map(abstract.corpus, content_transformer(tolower))
 
 	# stop-word removing, stemming
-	suppressWarnings({ 
+	suppressWarnings({
 		abstract.corpus <- tm::tm_map(abstract.corpus, stripWhitespace)
 		abstract.corpus <- tm::tm_map(abstract.corpus, content_transformer(tolower))
 		abstract.corpus <- tm::tm_map(abstract.corpus, removeWords, stopwords("english") )
