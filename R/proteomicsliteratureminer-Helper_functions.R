@@ -178,7 +178,7 @@ pubmed_record <- function(pubres, vec.keyword=NA, synonyms=NULL, fields="TI") {
   # clean up
   dat.pubmed = dat.pubmed[!grepl('^\\[', dat.pubmed$Title),]
 
-  # dat.pubmed
+  dat.pubmed
 }
 
 
