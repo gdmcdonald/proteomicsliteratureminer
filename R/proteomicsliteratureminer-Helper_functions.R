@@ -1,9 +1,3 @@
-#####################################
-# Literature Miner Utility Functions
-# Jemma Wu jemma.wu@mq.edu.au
-# Last modified 12 March 2018
-#####################################
-
 pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1) {
 	fields = "TIAB"
 	if(ti.only=="Yes") fields = "TI"
