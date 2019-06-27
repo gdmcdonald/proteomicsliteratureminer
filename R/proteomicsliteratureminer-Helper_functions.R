@@ -274,7 +274,7 @@ abstract_clustering <- function(abstracts, method=c('hierarchical', 'kmeans'), k
     hc.cosine <- hclust(d.cosine , method="ward.D")
 
 
-    ct.cosine <- cluster::cutree(hc.cosine, k=k)
+    ct.cosine <- cutree(hc.cosine, k=k)
 
     clusterID.cosine <- as.vector(ct.cosine)
 
@@ -343,7 +343,7 @@ mesh_clustering <- function(meshs,k=4, file='plot_dist_mesh.png') {
     hc.cosine <- hclust(d.cosine , method="complete")
 
 
-    ct.cosine <- cluster::cutree(hc.cosine, k=k)
+    ct.cosine <- cutree(hc.cosine, k=k)
 
     clusterID.cosine <- as.vector(ct.cosine)
 
