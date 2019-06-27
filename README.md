@@ -33,8 +33,8 @@ Ex.2. Reading an Excel and converting it to a R dataframe
 ``` r
 library(proteomicsliteratureminer)
 library(openxlsx)
-dat.input <- readWorkbook("Input_uniprot_Keywords.xlsx")
-result <- pubmedMiner_entry(dat.input, output.file = "potential_marker_pubmed_results.xlsx")
+dat.input <- readWorkbook(system.file("extdata", "input_uniprot_keywords.xlsx", package="proteomicsliteratureminer"))
+result <- pubmedMiner_entry(dat.input, output.file = "input_uniprot_keywords_pubmed_results.xlsx")
 ```
 
 ## Citing

@@ -27,7 +27,7 @@ install_github("Sydney-Informatics-Hub/proteomicsliteratureminer")
 The literature miner entry function takes as argument a R Datafframe and generates an Excel spreadsheet that has the relevant PubMed query results.
 The package provides a ready to use R dataframe, potentialmarker. This dataframe is loaded when the package is installed and can be used as an argument to the
 pubmedMiner_entry function. To get more information on potentialmarker, run the folllowing R command - 
-```{r proteomicsliteratureminer}
+```{r Example R Dataframe}
 library(proteomicsliteratureminer)
 ?potentialmarker
 ```
@@ -35,24 +35,24 @@ library(proteomicsliteratureminer)
 The way of getting a Microsoft Excel file with the Pubmed publication corresponding to the UniProt identifiers and user-defined keywords is shown byexample below
 
 Ex.1. Using the R data frame provided by the proteomicsliteratureminer package
-```{r proteomicsliteratureminer}
+```{r read default R dataframe}
 library(proteomicsliteratureminer)
 result <- pubmedMiner_entry(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx")
 ```
 
 Ex.2. Reading an Excel and converting it to a R dataframe
-```{r proteomicsliteratureminer}
+```{r read input as Excel spreadsheet}
 library(proteomicsliteratureminer)
 library(openxlsx)
-dat.input <- readWorkbook("Input_uniprot_Keywords.xlsx")
+dat.input <- readWorkbook(system.file("extdata", "input_uniprot_keywords.xlsx", package="proteomicsliteratureminer"))
 result <- pubmedMiner_entry(dat.input, output.file = "potential_marker_pubmed_results.xlsx")
 ```
 
-## Vignette Info
-To be filled.
-
 ## Figures
-Tha algorithm implemented in this package to retrieve the PubMed relevant literature based on UniProt iDs and user defined keyword is depicted in the figure below.
-![PubMed Literature Mining Algorithm](images/LiteratureRetrievalFlow.jpg)
+Thw algorithm implemented in this package to retrieve the PubMed relevant literature based on UniProt iDs and user defined keyword is depicted in the figure below.
+
+```{r echo = FALSE, out.width = '80%'}
+knitr::include_graphics("LiteratureRetrievalFlow.png")
+```
 
 
