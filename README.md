@@ -26,7 +26,7 @@ library(proteomicsliteratureminer)
 Ex.1. Using the R data frame provided by the package
 ``` r
 library(proteomicsliteratureminer)
-pubmedMiner_entry(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx")
+result <- pubmedMiner_entry(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx")
 ```
 
 Ex.2. Reading an Excel and converting it to a R dataframe
@@ -34,7 +34,7 @@ Ex.2. Reading an Excel and converting it to a R dataframe
 library(proteomicsliteratureminer)
 library(openxlsx)
 dat.input <- readWorkbook("Input_uniprot_Keywords.xlsx")
-pubmedMiner_entry(dat.input, output.file = "potential_marker_pubmed_results.xlsx")
+result <- pubmedMiner_entry(dat.input, output.file = "potential_marker_pubmed_results.xlsx")
 ```
 
 ## Citing
