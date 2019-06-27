@@ -1,3 +1,14 @@
+#' @importFrom grDevices dev.off
+#' @importFrom graphics axis
+#' @import graphics barplot
+#' @import graphics layout
+#' @import graphics lines
+#' @import graphics par
+#' @import stats as.dist
+#' @import stats cutree
+#' @import stats hclust
+#' @import stats na.omit
+
 pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1) {
   fields = "TIAB"
 
@@ -293,7 +304,7 @@ mesh_clustering <- function(meshs,k=4, file='plot_dist_mesh.png') {
 
     stopifnot(all(rowSums(mat.mesh) > 0))
 
-    png(file, 2000, 2000, res=300)
+    #png(file, 2000, 2000, res=300)
 
     par(mar=c(12,5,4,2)+.1)
     bp = barplot(sort(table(all.meshs), decreasing=TRUE)[1:NumTopMeash],
@@ -302,7 +313,8 @@ mesh_clustering <- function(meshs,k=4, file='plot_dist_mesh.png') {
       las=2, cex.lab=.8,
       ylab='Frequency')
 
-    dev.off()
+    #dev.off()
+
   }
 
   if(length(nna.meshs) > 10) {

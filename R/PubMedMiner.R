@@ -1,6 +1,9 @@
+#' @import utils setTxtProgressBar
+#' @import utils txtProgressBar
+
 #' Generates a list of Pubmed results based on a UniProt ID and a user-defined keyword.
 #'
-#' @param dat.input R dataframe having 5 attributes, UniProtID, IDType, TaxID, Keyword, KeywordInTitleOnly.
+#' @param df R dataframe having 5 attributes, UniProtID, IDType, TaxID, Keyword, KeywordInTitleOnly.
 #' @param output.file Path to the output  file with the results of the Pubmed query.
 #' @return Generates an Excel file \code{output.file} with Pubmed query results using the UniProt identifers and keyword search in \code{query.file}.
 #' @examples
@@ -8,20 +11,20 @@
 #' dat.input <- openxlsx::readWorkbook("~/Input.xlsx")
 #' pubmedMiner_entry(dat.input, output.file = "~/Pubmed_results.xlsx")
 #' @export
-pubmedMiner_entry <- function(dat.input, output.file = "pubmed_results.xlsx") {
+pubmedMiner_entry <- function(df, output.file = "pubmed_results.xlsx") {
   list.datquery = list()
   list.datpubmed = list()
 
   # create progress bar
-  pb <- txtProgressBar(min = 0, max = nrow(dat.input), style = 3)
+  pb <- txtProgressBar(min = 0, max = nrow(df), style = 3)
 
   for(query.idx in 1:nrow(dat.input)) {
     Sys.sleep(0.1)
-    UniProtID = dat.input[query.idx, 'UniProtID']
-    IDType = dat.input[query.idx, "IDType"]
-    taxid = dat.input[query.idx, 'TaxID']
-    keyword =  dat.input[query.idx, 'Keyword']
-    ti.only = dat.input[query.idx,5]
+    UniProtID = df[query.idx, 'UniProtID']
+    IDType = df[query.idx, "IDType"]
+    taxid = df[query.idx, 'TaxID']
+    keyword =  df[query.idx, 'Keyword']
+    ti.only = df[query.idx,5]
 
     pd.res <- try(pubmed_miner(UniProtID, IDType, taxid, keyword, ti.only, query.idx=query.idx))
 
@@ -41,7 +44,6 @@ pubmedMiner_entry <- function(dat.input, output.file = "pubmed_results.xlsx") {
     # update progress bar
     setTxtProgressBar(pb, query.idx)
   }
-
 
   all.datquery = do.call(rbind, list.datquery)
   all.datquery$NQuery = 1:nrow(all.datquery)
@@ -77,8 +79,6 @@ pubmedMiner_entry <- function(dat.input, output.file = "pubmed_results.xlsx") {
 
   list(all.datquery=all.datquery, list.datpubmed=list.datpubmed, list.datquery=list.datquery)
 }
-
-
 
 
 

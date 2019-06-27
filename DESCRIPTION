@@ -1,5 +1,5 @@
 Package: proteomicsliteratureminer
-Title: Automates retrieval of literature from PubMed for proteomics data using UniProt identifiers and user-defined keyword search.
+Title: Automates retrieval of literature from PubMed for proteomics data using UniProt identifiers and user-defined keyword search
 Version: 0.0.0.9000
 Authors@R:
     c(person(given = "Mark",
