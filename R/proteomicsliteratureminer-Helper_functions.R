@@ -178,7 +178,7 @@ pubmed_record <- function(pubres, vec.keyword=NA, synonyms=NULL, fields="TI") {
   # clean up
   dat.pubmed = dat.pubmed[!grepl('^\\[', dat.pubmed$Title),]
 
-  #dat.pubmed
+  dat.pubmed
 }
 
 
@@ -252,11 +252,9 @@ abstract_clustering <- function(abstracts, method=c('hierarchical', 'kmeans'), k
     # pairwise distance matrix
     d.cosine <- cosineDist(mat.tfidf)
 
-
     # hierarchical clustering
 
     hc.cosine <- hclust(d.cosine , method="ward.D")
-
 
     ct.cosine <- cutree(hc.cosine, k=k)
 
@@ -266,7 +264,7 @@ abstract_clustering <- function(abstracts, method=c('hierarchical', 'kmeans'), k
   } else { #kmeans
 
   }
-  # res
+  res
 
 }
 
@@ -330,7 +328,7 @@ mesh_clustering <- function(meshs,k=4, file='plot_dist_mesh.png') {
 
     res[!idx.na] <- clusterID.cosine
   }
-  #res
+  res
 
 }
 
