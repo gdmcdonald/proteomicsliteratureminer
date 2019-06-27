@@ -3,7 +3,6 @@
 # Jemma Wu jemma.wu@mq.edu.au
 # Last modified 12 March 2018
 #####################################
-#library(tm)
 
 pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1) {
 	fields = "TIAB"
@@ -15,9 +14,9 @@ pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1
 	dat.pubmed = "No pubmed results returned!"
 
 	if(!is.null(UniProtID)) {
-		print("Getting uniprot synonyms ... ")
+		
 		synonyms <- try(getUniprotSynonyms(UniProtID, IDType, taxid))
-		print(synonyms)
+
 		if(!inherits(synonyms, "try-error")) {
 		  if(!is.null(synonyms)) {
 			vec.keyword=NA
@@ -172,7 +171,8 @@ plot_stats <- function(dat.pubmed, file='barplotNwordcloud.png') {
 	all.abstract = paste(dat.pubmed$Abstract, collapse=' ')
 
 	# word cloud of abstracts
-	wcl = try(wordcloud::wordcloud(all.abstract, max.words=200))
+	suppressWarnings({ wcl = try(wordcloud(all.abstract, max.words=200)) })
+	
 	# barplots of top 20 MeSH
 	dev.off()
 }
@@ -186,10 +186,12 @@ abstract_clustering <- function(abstracts, method=c('hierarchical', 'kmeans'), k
 	# abstract.corpus <- tm_map(abstract.corpus, content_transformer(tolower))
 
 	# stop-word removing, stemming
-	abstract.corpus <- tm::tm_map(abstract.corpus, stripWhitespace)
-	abstract.corpus <- tm::tm_map(abstract.corpus, content_transformer(tolower))
-	abstract.corpus <- tm::tm_map(abstract.corpus, removeWords, stopwords("english") )
-	abstract.corpus <- tm::tm_map(abstract.corpus, stemDocument)
+	suppressWarnings({ 
+		abstract.corpus <- tm::tm_map(abstract.corpus, stripWhitespace)
+		abstract.corpus <- tm::tm_map(abstract.corpus, content_transformer(tolower))
+		abstract.corpus <- tm::tm_map(abstract.corpus, removeWords, stopwords("english") )
+		abstract.corpus <- tm::tm_map(abstract.corpus, stemDocument)
+	})
 
 	dtm.tfidf <- tm::DocumentTermMatrix(abstract.corpus, control=list(removePunctuation=TRUE,
 													removeNumbers=TRUE,
@@ -197,19 +199,12 @@ abstract_clustering <- function(abstracts, method=c('hierarchical', 'kmeans'), k
 
 	inspect(dtm.tfidf)
 
-	#nsparce.dtm <- removeSparseTerms(dtm.tfidf, 0.5) # could create documents with all 0 term values
-
-	# inspect(nsparce.dtm)
-
 	mat.tfidf <- as.matrix(	dtm.tfidf)
 
 	if(method == 'hierarchical') {
 	# pairwise distance matrix
 	d.cosine <- cosineDist(mat.tfidf)
 
-	# which(is.na(d.cosine))
-	# matrix(is.na(d.cosine), ncol=ncol(d.cosine))
-	# hierarchical clustering
 
 	hc.cosine <- hclust(d.cosine , method="ward.D")
 	# plot(hc, hang=-1)
