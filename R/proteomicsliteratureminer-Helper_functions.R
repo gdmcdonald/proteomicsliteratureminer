@@ -8,6 +8,8 @@
 #' @import stats cutree
 #' @import stats hclust
 #' @import stats na.omit
+#' @import utils setTxtProgressBar
+#' @import utils txtProgressBar
 
 pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1) {
   fields = "TIAB"

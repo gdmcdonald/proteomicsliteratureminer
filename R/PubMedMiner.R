@@ -1,6 +1,3 @@
-#' @import utils setTxtProgressBar
-#' @import utils txtProgressBar
-
 #' Generates a list of Pubmed results based on a UniProt ID and a user-defined keyword.
 #'
 #' @param df R dataframe having 5 attributes, UniProtID, IDType, TaxID, Keyword, KeywordInTitleOnly.
