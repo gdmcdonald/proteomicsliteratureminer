@@ -11,6 +11,7 @@ The goal of proteomicsliteratureminer is to streamline the process of literature
 You can install the released version of proteomicsliteratureminer from [SIH-GIT](https://github.com/Sydney-Informatics-Hub/proteomicsliteratureminer) with:
 
 ``` r
+install.packages(devtools) # only if devtools is not installed
 install_github("Sydney-Informatics-Hub/proteomicsliteratureminer")
 ```
 
