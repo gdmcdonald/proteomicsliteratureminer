@@ -53,6 +53,6 @@ To be filled.
 
 ## Figures
 Tha algorithm implemented in this package to retrieve the PubMed relevant literature based on UniProt iDs and user defined keyword is depicted in the figure below.
-![PubMed Literature Mining Algorithm](images/LiteratureRetrievalFlow.png)
+![PubMed Literature Mining Algorithm](images/LiteratureRetrievalFlow.jpg)
 
 
