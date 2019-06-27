@@ -23,9 +23,19 @@ library(proteomicsliteratureminer)
 ?potentialmarker
 ```
 
+Ex.1. Using the R data frame provided by the package
 ``` r
 library(proteomicsliteratureminer)
 pubmedMiner_entry(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx")
 ```
+
+Ex.2. Reading an Excel and converting it to a R dataframe
+``` r
+library(proteomicsliteratureminer)
+library(openxlsx)
+dat.input <- readWorkbook("Input_uniprot_Keywords.xlsx")
+pubmedMiner_entry(dat.input, output.file = "potential_marker_pubmed_results.xlsx")
+```
+
 ## Citing
-When using Lit-helper please cite: Steffen P, Wu J, Hariharan S, Molloy MP, Schluter H, Lit-helper A bioinformatics tool for prioritizing biological leads from omics data using literature mining.
+When using Lit-helper please cite: Steffen P, Wu J, Hariharan S, Molloy MP, Schluter H, proteomicsliteratureminer A bioinformatics tool for prioritizing biological leads from omics data using literature mining.

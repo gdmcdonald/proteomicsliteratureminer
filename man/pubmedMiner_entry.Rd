@@ -19,6 +19,6 @@ Generates a list of Pubmed results based on a UniProt ID and a user-defined keyw
 }
 \examples{
 pubmedMiner_entry(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx")
-dat.input <- readWorkbook("~/Input.xlsx")
+dat.input <- openxlsx::readWorkbook("~/Input.xlsx")
 pubmedMiner_entry(dat.input, output.file = "~/Pubmed_results.xlsx")
 }
