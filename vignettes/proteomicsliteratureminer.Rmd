@@ -19,33 +19,51 @@ knitr::opts_chunk$set(
 Proteomics and genomics discovery experiments generate increasingly large result tables, necessitating more researcher time to covert data into knowledge. Literature review is an important step in this process and can be tedious for large scale experiments. An informed and strategic decision about which biomolecule targets should be pursued for follow-up experiements remains a challenge. The **proteomicsliteratureminer** package contains functions to streamline and automate the retrieval of literature from PubMed based on Uniprot identifiers and a user defined keyword search.
 
 Install **proteomicsliteratureminer** using
-```{r install, results='hide'}
+```{r install, eval = FALSE}
 install.packages(devtools) # only if devtools is not installed
+library(devtools)
 install_github("Sydney-Informatics-Hub/proteomicsliteratureminer")
 ```
 
-The literature miner entry function takes as argument a R Datafframe and generates an Excel spreadsheet that has the relevant PubMed query results.
-The package provides a ready to use R dataframe, potentialmarker. This dataframe is loaded when the package is installed and can be used as an argument to the
-pubmedMiner_entry function. To get more information on potentialmarker, run the folllowing R command - 
-```{r Example R Dataframe,results='hide'}
-library(proteomicsliteratureminer)
-?potentialmarker
-```
+The `pubMedMiner()` function takes as input argument a R Dataframe `df` as the query which looks like the example dataframe `potentialmarker` which comes with the package:
 
-The way of getting a Microsoft Excel file with the Pubmed publication corresponding to the UniProt identifiers and user-defined keywords is shown byexample below
+|UniProtID |IDType    | TaxID|Keyword |KeywordInTitleOnly |
+|:---------|:---------|-----:|:-------|:------------------|
+|Q14914    |Accession |  9606|Cancer  |Yes                |
+|P0DMN0    |Accession |  9606|Cancer  |Yes                |
+|P21980    |Accession |  9606|Cancer  |Yes                |
+|Q61475    |Accession | 10090|Cancer  |Yes                |
 
-Ex.1. Using the R data frame provided by the proteomicsliteratureminer package
+It then searches the Uniprot database for synonyms, and then searches PubMed for papers containing these synonyms along with the specified keyword ('Cancer').
+
+It returns a nested list of results from Uniprot and Pubmed.
+
+Lastly it (optionally) generates an Excel spreadsheet that has the relevant PubMed query results, and graphs in each which show 
+
+- publications by year
+- publications by MeSH category
+- a word cloud of publication titles.
+
+The way of getting a Microsoft Excel file with the Pubmed publication corresponding to the UniProt identifiers and user-defined keywords is shown by example below:
+
+Ex.1. Using the R data frame provided by the proteomicsliteratureminer package, output to an R object
 ```{r read default R dataframe}
-library(proteomicsliteratureminer,results='hide')
-result <- pubmedMiner_entry(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx")
+library(proteomicsliteratureminer)
+result <- pubmedMiner(potentialmarker)
 ```
 
-Ex.2. Reading an Excel and converting it to a R dataframe
-```{r read input as Excel spreadsheet,results='hide'}
+Ex.2. Using the R data frame provided by the proteomicsliteratureminer package, output to a file
+```{r read default R dataframe}
+library(proteomicsliteratureminer)
+pubmedMiner(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx")
+```
+
+Ex.3. Reading an Excel and converting it to a R dataframe
+```{r read input as Excel spreadsheet}
 library(proteomicsliteratureminer)
 library(openxlsx)
-df <- readWorkbook(system.file("extdata", "input_uniprot_keywords.xlsx", package="proteomicsliteratureminer"))
-result <- pubmedMiner_entry(df, output.file = "potential_marker_pubmed_results.xlsx")
+dat.input <- readWorkbook(system.file("extdata", "input_uniprot_keywords.xlsx", package="proteomicsliteratureminer"))
+result <- pubmedMiner(dat.input, output.file = "potential_marker_pubmed_results.xlsx")
 ```
 
 ## Figures
