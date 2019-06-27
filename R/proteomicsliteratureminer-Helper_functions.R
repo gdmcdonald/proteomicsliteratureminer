@@ -1,3 +1,16 @@
+#' @importFrom grDevices dev.off
+#' @importFrom graphics axis
+#' @importFrom graphics barplot
+#' @importFrom graphics layout
+#' @importFrom graphics lines
+#' @importFrom graphics par
+#' @importFrom stats as.dist
+#' @importFrom stats cutree
+#' @importFrom stats hclust
+#' @importFrom stats na.omit
+#' @importFrom utils setTxtProgressBar
+#' @importFrom utils txtProgressBar
+
 pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1) {
   fields = "TIAB"
 
