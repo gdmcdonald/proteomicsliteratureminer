@@ -5,8 +5,8 @@
 #' @return Generates an Excel file \code{output.file} with Pubmed query results using the UniProt identifers and keyword search in \code{query.file}.
 #' @examples
 #' pubmedMiner_entry(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx")
-#' dat.input <- openxlsx::readWorkbook("~/Input.xlsx")
-#' pubmedMiner_entry(dat.input, output.file = "~/Pubmed_results.xlsx")
+#' df <- openxlsx::readWorkbook("~/Input.xlsx")
+#' pubmedMiner_entry(df, output.file = "~/Pubmed_results.xlsx")
 #' @export
 pubmedMiner_entry <- function(df, output.file = "pubmed_results.xlsx") {
   list.datquery = list()
@@ -15,7 +15,7 @@ pubmedMiner_entry <- function(df, output.file = "pubmed_results.xlsx") {
   # create progress bar
   pb <- txtProgressBar(min = 0, max = nrow(df), style = 3)
 
-  for(query.idx in 1:nrow(dat.input)) {
+  for(query.idx in 1:nrow(df)) {
     Sys.sleep(0.1)
     UniProtID = df[query.idx, 'UniProtID']
     IDType = df[query.idx, "IDType"]
