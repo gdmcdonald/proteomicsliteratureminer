@@ -17,11 +17,14 @@ install_github("Sydney-Informatics-Hub/proteomicsliteratureminer")
 
 ## Example
 
-This is a basic example which shows you how to create an Excel file which has the Pubmed results:
+This is a basic example which shows you how to create an Excel file which has the Pubmed results. potentialmarker is a R dataframe that is part of the R package, for description of its contents, run the following R command
+``` r
+data(potentialmarker)
+```
 
 ``` r
 library(proteomicsliteratureminer)
-pubmedMiner_entry(query.file = "potential_marker.xlsx", output.file = "potential_marker_pubmed_results.xlsx")
+pubmedMiner_entry(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx")
 ```
 ## Citing
 When using Lit-helper please cite: Steffen P, Wu J, Hariharan S, Molloy MP, Schluter H, Lit-helper A bioinformatics tool for prioritizing biological leads from omics data using literature mining.
