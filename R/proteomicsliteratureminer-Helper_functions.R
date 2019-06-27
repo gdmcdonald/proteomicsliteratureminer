@@ -178,7 +178,7 @@ pubmed_record <- function(pubres, vec.keyword=NA, synonyms=NULL, fields="TI") {
   # clean up
   dat.pubmed = dat.pubmed[!grepl('^\\[', dat.pubmed$Title),]
 
-  dat.pubmed
+  # dat.pubmed
 }
 
 
@@ -239,7 +239,6 @@ abstract_clustering <- function(abstracts, method=c('hierarchical', 'kmeans'), k
     abstract.corpus <- tm::tm_map(abstract.corpus, stemDocument)
   })
 
-
   dtm.tfidf <- tm::DocumentTermMatrix(abstract.corpus, control=list(removePunctuation=TRUE,
     removeNumbers=TRUE,
     weighting=function(x) weightTfIdf(x, normalize=FALSE)) )
@@ -261,18 +260,14 @@ abstract_clustering <- function(abstracts, method=c('hierarchical', 'kmeans'), k
     clusterID.cosine <- as.vector(ct.cosine)
 
     res[!idx.na] <- clusterID.cosine
-  } else { #kmeans
+  } #else { #kmeans
 
-  }
+  #}
   # res
-
 }
 
-
 mesh_matrix <- function(v, u) { # v and u are two mesh terms
-
   1*(u %in% v)
-
 }
 
 # meshs is a vector of MeSH terms delimited by ','
@@ -310,9 +305,7 @@ mesh_clustering <- function(meshs,k=4, file='plot_dist_mesh.png') {
       las=2, cex.lab=.8,
       ylab='Frequency')
 
-
     dev.off()
-
   }
 
   if(length(nna.meshs) > 10) {
@@ -328,12 +321,10 @@ mesh_clustering <- function(meshs,k=4, file='plot_dist_mesh.png') {
 
     res[!idx.na] <- clusterID.cosine
   }
-  res
-
+  # res
 }
 
 # cosine similarity, cos(a,b) = a.b/norm(a)*norm(b)
 cosineDist <- function(x) {
   as.dist(1-x%*%t(x)/(sqrt(rowSums(x^2) %*% t(sqrt(rowSums(x^2)))) ))
-
 }
