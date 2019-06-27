@@ -5,74 +5,78 @@
 #' @return Generates an Excel file \code{output.file} with Pubmed query results using the UniProt identifers and keyword search in \code{query.file}.
 #' @examples
 #' pubmedMiner_entry(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx")
+#' dat.input <- readWorkbook("~/Input.xlsx")
+#' pubmedMiner_entry(dat.input, output.file = "~/Pubmed_results.xlsx")
 #' @export
 pubmedMiner_entry <- function(dat.input, output.file = "pubmed_results.xlsx") {
+  list.datquery = list()
+  list.datpubmed = list()
 
-	list.datquery = list()
-	list.datpubmed = list()
+  # create progress bar
+  pb <- txtProgressBar(min = 0, max = nrow(dat.input), style = 3)
 
-	# create progress bar
-	pb <- txtProgressBar(min = 0, max = nrow(dat.input), style = 3)
+  for(query.idx in 1:nrow(dat.input)) {
+    Sys.sleep(0.1)
+    UniProtID = dat.input[query.idx, 'UniProtID']
+    IDType = dat.input[query.idx, "IDType"]
+    taxid = dat.input[query.idx, 'TaxID']
+    keyword =  dat.input[query.idx, 'Keyword']
+    ti.only = dat.input[query.idx,5]
 
-	for(query.idx in 1:nrow(dat.input)) {
-		Sys.sleep(0.1)
+    pd.res <- try(pubmed_miner(UniProtID, IDType, taxid, keyword, ti.only, query.idx=query.idx))
 
-	  UniProtID = dat.input[query.idx, 'UniProtID']
-	  IDType = dat.input[query.idx, "IDType"]
-		taxid = dat.input[query.idx, 'TaxID']
-		keyword =  dat.input[query.idx, 'Keyword']
-		ti.only = dat.input[query.idx,5]
+    if(!inherits(pd.res, 'try-error')) {
 
-		pd.res <- try(pubmed_miner(UniProtID, IDType, taxid, keyword, ti.only, query.idx=query.idx))
+      list.datquery[[query.idx]] = pd.res$dat.query
+      list.datpubmed[[query.idx]] = pd.res$dat.pubmed
 
-		if(!inherits(pd.res, 'try-error')) {
+    } else {
+      list.datquery[[query.idx]] = data.frame('UniProtID'=UniProtID, 'GeneID' = NA, 'TaxID'=taxid, 'Synonyms' = paste(synonyms, collapse=','),
+        'Keywords' = keyword, 'KeywordInTitleOnly'=ti.only, 'TotalResults'=0,
+        'Category' = 3, 'False' = 0, 'PubmedQuery'=NA)
 
-			list.datquery[[query.idx]] = pd.res$dat.query
-			list.datpubmed[[query.idx]] = pd.res$dat.pubmed
+      list.datpubmed[[query.idx]] = 'No result'
 
-		} else {
-			list.datquery[[query.idx]] = data.frame('UniProtID'=UniProtID, 'GeneID' = NA, 'TaxID'=taxid, 'Synonyms' = paste(synonyms, collapse=','),
-			'Keywords' = keyword, 'KeywordInTitleOnly'=ti.only, 'TotalResults'=0,
-			'Category' = 3, 'False' = 0, 'PubmedQuery'=NA)
+    }
+    # update progress bar
+    setTxtProgressBar(pb, query.idx)
+  }
 
-			list.datpubmed[[query.idx]] = 'No result'
-		}
-		# update progress bar
-		setTxtProgressBar(pb, query.idx)
-	}
 
-	all.datquery = do.call(rbind, list.datquery)
-	all.datquery$NQuery = 1:nrow(all.datquery)
-	all.datquery = all.datquery[,c(ncol(all.datquery),1:(ncol(all.datquery)-1))]
+  all.datquery = do.call(rbind, list.datquery)
+  all.datquery$NQuery = 1:nrow(all.datquery)
+  all.datquery = all.datquery[,c(ncol(all.datquery),1:(ncol(all.datquery)-1))]
 
-	all.datquery[is.na(all.datquery)] = ''
-	# output
-	wb = openxlsx::createWorkbook()
-	openxlsx::addWorksheet(wb, sheetName="query")
-	writeData(wb,"query", all.datquery)
+  all.datquery[is.na(all.datquery)] = ''
+  # output
 
-	for(ii in 1:length(list.datpubmed) ) {
-		list.datquery[[ii]][is.na(list.datquery[[ii]])] = ''
-		openxlsx::addWorksheet(wb, sheetName=paste("pubmed result", ii) )
-		writeData(wb, paste("pubmed result", ii), list.datquery[[ii]])
-		writeData(wb, paste("pubmed result", ii), list.datpubmed[[ii]], startRow=4)
+  wb = openxlsx::createWorkbook()
 
-		if(file.exists(paste('barplotNwordcloud', ii, '.png', sep='') ) )
-		  openxlsx::insertImage(wb, paste("pubmed result", ii), paste('barplotNwordcloud', ii, '.png', sep=''),
-				width=5, height=8, startRow = 3, startCol=12)
+  openxlsx::addWorksheet(wb, sheetName="query")
 
-		if(file.exists(paste('plot_dist_mesh', ii, '.png', sep='') ) )
-		  openxlsx::insertImage(wb, paste("pubmed result", ii), paste('plot_dist_mesh', ii, '.png', sep=''),
-				width=5, height=5, startRow = 3, startCol=20)
-	}
+  writeData(wb,"query", all.datquery)
 
-	openxlsx::saveWorkbook(wb, output.file, overwrite=T)
-	list(all.datquery=all.datquery, list.datpubmed=list.datpubmed, list.datquery=list.datquery)
+  for(ii in 1:length(list.datpubmed) ) {
+
+    list.datquery[[ii]][is.na(list.datquery[[ii]])] = ''
+
+    addWorksheet(wb, sheetName=paste("pubmed result", ii) )
+    writeData(wb, paste("pubmed result", ii), list.datquery[[ii]])
+    writeData(wb, paste("pubmed result", ii), list.datpubmed[[ii]], startRow=4)
+
+    if(file.exists(paste('barplotNwordcloud', ii, '.png', sep='') ) )
+      insertImage(wb, paste("pubmed result", ii), paste('barplotNwordcloud', ii, '.png', sep=''),
+        width=5, height=8, startRow = 3, startCol=12)
+
+    if(file.exists(paste('plot_dist_mesh', ii, '.png', sep='') ) )
+      insertImage(wb, paste("pubmed result", ii), paste('plot_dist_mesh', ii, '.png', sep=''),
+        width=5, height=5, startRow = 3, startCol=20)
+  }
+
+  openxlsx::saveWorkbook(wb, output.file, overwrite=T)
+
+  list(all.datquery=all.datquery, list.datpubmed=list.datpubmed, list.datquery=list.datquery)
 }
-
-
-
-
 
 
 

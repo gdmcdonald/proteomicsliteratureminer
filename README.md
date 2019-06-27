@@ -19,7 +19,8 @@ install_github("Sydney-Informatics-Hub/proteomicsliteratureminer")
 
 This is a basic example which shows you how to create an Excel file which has the Pubmed results. potentialmarker is a R dataframe that is part of the R package, for description of its contents, run the following R command
 ``` r
-data(potentialmarker)
+library(proteomicsliteratureminer)
+?potentialmarker
 ```
 
 ``` r

@@ -63,7 +63,7 @@ getUniprotSynonyms <- function(UniProtID, IDType="Accession", taxid=9606) {
 			'+reviewed:yes&columns=genes&format=tab', sep='') #added +reviewed:yes for only reviewed hits and accession instead of gene
 	}
 
-  uniprot.res = try(GET(query))
+  uniprot.res = try(httr::GET(query))
 
 	list.syn = NULL
 	if(!inherits(uniprot.res, "try-error"))
