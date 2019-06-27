@@ -92,7 +92,7 @@ getUniprotSynonyms <- function(UniProtID, IDType="Accession", taxid=9606) {
   }
 
 
-  uniprot.res = try(GET(query))
+  uniprot.res = try(httr::GET(query))
 
   list.syn = NULL
   if(!inherits(uniprot.res, "try-error"))
@@ -132,9 +132,9 @@ pubmed_summary <- function(synonyms, vec.keyword=NA, fields="TIAB") {
     pub_query = paste0(qsynonym, collapse=paste0(fterm, ' OR ') )
   }
 
-  pubres = EUtilsSummary(pub_query, datetype="pdat")
+  pubres = RISmed::EUtilsSummary(pub_query, datetype="pdat")
 
-  res.count = QueryCount(pubres)
+  res.count = RISmed::QueryCount(pubres)
 
 
   list(pubres=pubres, res.count=res.count, pub.query=pub_query)
@@ -143,16 +143,16 @@ pubmed_summary <- function(synonyms, vec.keyword=NA, fields="TIAB") {
 
 pubmed_record <- function(pubres, vec.keyword=NA, synonyms=NULL, fields="TI") {
 
-  pubrecords = EUtilsGet(pubres)
+  pubrecords = RISmed::EUtilsGet(pubres)
 
-  titles =  ArticleTitle(pubrecords)
-  abstracts = AbstractText(pubrecords)
-  years = YearPubmed(pubrecords)
-  list.authors = Author(pubrecords)	 # list
-  list.aff = Affiliation(pubrecords) # list
-  country = Country(pubrecords)
-  pmid = PMID(pubrecords)
-  ptyp = PublicationType(pubrecords) # list
+  titles =  RISmed::ArticleTitle(pubrecords)
+  abstracts = RISmed::AbstractText(pubrecords)
+  years = RISmed::YearPubmed(pubrecords)
+  list.authors = RISmed::Author(pubrecords)	 # list
+  list.aff = RISmed::Affiliation(pubrecords) # list
+  country = RISmed::Country(pubrecords)
+  pmid = RISmed::PMID(pubrecords)
+  ptyp = RISmed::PublicationType(pubrecords) # list
   is.review = sapply(1:length(ptyp), function(i) "Review" %in% ptyp[[i]])
 
   # Check false discovery
@@ -171,7 +171,7 @@ pubmed_record <- function(pubres, vec.keyword=NA, synonyms=NULL, fields="TI") {
     has.synm = (has.synm + sapply(abstracts, function(x)
       any(sapply(synonyms, function(y) grepl(tolower(y), tolower(x)))), USE.NAMES=FALSE ) ) > 0
 
-  list.mesh = Mesh(pubrecords) # list
+  list.mesh = RISmed::Mesh(pubrecords) # list
 
   authors = sapply(list.authors, function(a) 	paste(paste(a$Initials, a$LastName), collapse=',') )
 
@@ -228,7 +228,7 @@ plot_stats <- function(dat.pubmed, file='barplotNwordcloud.png') {
   all.abstract = paste(dat.pubmed$Abstract, collapse=' ')
 
   # word cloud of abstracts
-  suppressWarnings({ wcl = try(wordcloud(all.abstract, max.words=200)) })
+  suppressWarnings({ wcl = try(wordcloud::wordcloud(all.abstract, max.words=200)) })
 
   # barplots of top 20 MeSH
 
@@ -241,24 +241,22 @@ plot_stats <- function(dat.pubmed, file='barplotNwordcloud.png') {
 
 abstract_clustering <- function(abstracts, method=c('hierarchical', 'kmeans'), k=4) {
 
-  library(tm)
-
   res <- rep(NA, length(abstracts))
 
   idx.na = nchar(abstracts)==0
 
-  abstract.corpus <- Corpus(VectorSource(abstracts[!idx.na]))
+  abstract.corpus <- tm::Corpus(VectorSource(abstracts[!idx.na]))
 
   # stop-word removing, stemming
   suppressWarnings({
-    abstract.corpus <- tm_map(abstract.corpus, stripWhitespace)
-    abstract.corpus <- tm_map(abstract.corpus, content_transformer(tolower))
-    abstract.corpus <- tm_map(abstract.corpus, removeWords, stopwords("english") )
-    abstract.corpus <- tm_map(abstract.corpus, stemDocument)
+    abstract.corpus <- tm::tm_map(abstract.corpus, stripWhitespace)
+    abstract.corpus <- tm::tm_map(abstract.corpus, content_transformer(tolower))
+    abstract.corpus <- tm::tm_map(abstract.corpus, removeWords, stopwords("english") )
+    abstract.corpus <- tm::tm_map(abstract.corpus, stemDocument)
   })
 
 
-  dtm.tfidf <- DocumentTermMatrix(abstract.corpus, control=list(removePunctuation=TRUE,
+  dtm.tfidf <- tm::DocumentTermMatrix(abstract.corpus, control=list(removePunctuation=TRUE,
     removeNumbers=TRUE,
     weighting=function(x) weightTfIdf(x, normalize=FALSE)) )
 
@@ -273,10 +271,10 @@ abstract_clustering <- function(abstracts, method=c('hierarchical', 'kmeans'), k
 
     # hierarchical clustering
 
-    hc.cosine <- hclust(d.cosine , method="ward.D")
+    hc.cosine <- cluster::hclust(d.cosine , method="ward.D")
 
 
-    ct.cosine <- cutree(hc.cosine, k=k)
+    ct.cosine <- cluster::cutree(hc.cosine, k=k)
 
     clusterID.cosine <- as.vector(ct.cosine)
 
@@ -339,13 +337,13 @@ mesh_clustering <- function(meshs,k=4, file='plot_dist_mesh.png') {
   if(length(nna.meshs) > 10) {
 
     # pairwise distance matrix
-    d.cosine <- cosineDist(mat.mesh)
+    d.cosine <- cluster::cosineDist(mat.mesh)
 
 
-    hc.cosine <- hclust(d.cosine , method="complete")
+    hc.cosine <- cluster::hclust(d.cosine , method="complete")
 
 
-    ct.cosine <- cutree(hc.cosine, k=k)
+    ct.cosine <- cluster::cutree(hc.cosine, k=k)
 
     clusterID.cosine <- as.vector(ct.cosine)
 

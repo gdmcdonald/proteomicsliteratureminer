@@ -29,6 +29,12 @@ Imports:
     RISmed,
     tm,
     wordcloud
+Depends:
+    cluster,
+    httr,
+    RISmed,
+    tm,
+    wordcloud
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.0.9000
 LinkingTo:
