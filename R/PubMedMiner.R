@@ -1,18 +1,6 @@
-#####################################################################################################
-# Literature Miner Entry Functions
-# Jemma Wu jemma.wu@mq.edu.au
-# Last modified 11 July 2018
-# Usage: type the following commands in R console
-# rm(list=ls())
-# setwd("C:\\Pascal_ProteinLiteratureFinder\\GeneLiteratureMinerV.55_uniprotsyn") or
-# setwd("\\\\apaf-hpv-file\\BioInfo_Project\\Projects\\TextMining\\Pascal_ProteinLiteratureFinder\\GeneLiteratureMinerV.55_uniprotsyn")
-# source('ProteinLiteratureMiner_functions.R')
-# source('pubmedMiner_entry.R')
-# res <- system.time(pubmedMiner_entry(query.file="potential_marker.xlsx", output.file = "potential_marker_pubmed_results.xlsx"))
-#####################################################################################################
 #' Generates a list of Pubmed results based on a UniProt ID and a user-defined keyword.
 #'
-#' @param potentialmarker R dataframe having 5 attributes, UniProtID, IDType, TaxID, Keyword, KeywordInTitleOnly.
+#' @param dat.input R dataframe having 5 attributes, UniProtID, IDType, TaxID, Keyword, KeywordInTitleOnly.
 #' @param output.file Path to the output  file with the results of the Pubmed query.
 #' @return Generates an Excel file \code{output.file} with Pubmed query results using the UniProt identifers and keyword search in \code{query.file}.
 #' @examples
