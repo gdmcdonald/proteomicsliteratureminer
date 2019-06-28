@@ -74,7 +74,7 @@ pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1
             #mesh_clustering(as.character(dat.pubmed$MeSH), file=plot_path )
             dat.pubmed$Cluster.byMeSH = mesh_clustering(as.character(dat.pubmed$MeSH), file=plot_path )
           }
-          
+
 
 
           dat.query$TotalResults = nrow(dat.pubmed)
@@ -330,7 +330,7 @@ mesh_clustering <- function(meshs,k=4, file='plot_dist_mesh.png') {
       las=2, cex.lab=.8,
       ylab='Frequency')
 
-    # dev.off()
+    dev.off()
 
   }
 
