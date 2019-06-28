@@ -61,12 +61,14 @@ pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1
               dir.create(output_dir)
             }
             plot_path = file.path(output_dir, file=paste('barplotNwordcloud', query.idx, '.png', sep=''))
-            plot_stats(dat.pubmed, file=plot_path )	
+            plot_stats(dat.pubmed, file=plot_path )
           }
 
           # TO assess
           if (!is.null(plots.dir)) {
-            plot_path = file.path(file.path(plots.dir), file=paste('plot_dist_mesh', query.idx, '.png', sep=''))
+            print('TO assess')
+            output_dir <- file.path(plots.dir)
+            plot_path = file.path(output_dir, file=paste('plot_dist_mesh', query.idx, '.png', sep=''))
             dat.pubmed$Cluster.byMeSH = mesh_clustering(as.character(dat.pubmed$MeSH), file=plot_path )
           }
 
