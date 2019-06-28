@@ -68,7 +68,9 @@ pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1
           if (!is.null(plots.dir)) {
             print('TO assess')
             output_dir <- file.path(plots.dir)
+            print(output_dir)
             plot_path = file.path(output_dir, file=paste('plot_dist_mesh', query.idx, '.png', sep=''))
+            print(plot_path)
             dat.pubmed$Cluster.byMeSH = mesh_clustering(as.character(dat.pubmed$MeSH), file=plot_path )
           }
 
