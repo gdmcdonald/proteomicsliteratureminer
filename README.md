@@ -12,7 +12,7 @@ You can install the released version of proteomicsliteratureminer from [SIH-GIT]
 
 ``` r
 install.packages(devtools) # only if devtools is not installed
-install_github("Sydney-Informatics-Hub/proteomicsliteratureminer")
+devtools::install_github("Sydney-Informatics-Hub/proteomicsliteratureminer")
 ```
 
 ## Example
