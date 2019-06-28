@@ -11,7 +11,7 @@
 #' @importFrom utils setTxtProgressBar
 #' @importFrom utils txtProgressBar
 
-pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1) {
+pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1, plots.dir) {
   fields = "TIAB"
 
   if(ti.only=="Yes") fields = "TI"
@@ -53,14 +53,22 @@ pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1
 
           dat.pubmed <- try(pubmed_record(pubres, vec.keyword, synonyms, fields))
 
-          # mining and analysis
-
-          plot_stats(dat.pubmed, file=paste('barplotNwordcloud', query.idx, '.png', sep='') )
+          # mining and analysis, plot only if the plots directory is specified.
+          if (!is.null(plots.dir)) {
+            # check and create the directory if it does not exists
+            output_dir <- file.path(plots.dir)
+            if (!dir.exists(output_dir)) {
+              dir.create(output_dir)
+            }
+            plot_path = file.path(output_dir, file=paste('barplotNwordcloud', query.idx, '.png', sep=''))
+            plot_stats(dat.pubmed, file=plot_path )	
+          }
 
           # TO assess
-
-          dat.pubmed$Cluster.byMeSH = mesh_clustering(as.character(dat.pubmed$MeSH),
-            file=paste('plot_dist_mesh', query.idx, '.png', sep='') )
+          if (!is.null(plots.dir)) {
+            plot_path = file.path(file.path(plots.dir), file=paste('plot_dist_mesh', query.idx, '.png', sep=''))
+            dat.pubmed$Cluster.byMeSH = mesh_clustering(as.character(dat.pubmed$MeSH), file=plot_path )
+          }
 
           dat.query$TotalResults = nrow(dat.pubmed)
 
