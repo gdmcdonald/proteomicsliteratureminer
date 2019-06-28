@@ -74,7 +74,7 @@ pubmedMiner_entry <- function(df, output.file = "pubmed_results.xlsx") {
 
   openxlsx::saveWorkbook(wb, output.file, overwrite=T)
 
-  list(all.datquery=all.datquery, list.datpubmed=list.datpubmed, list.datquery=list.datquery)
+  invisible(list(summary_results=all.datquery, pubmed_results=list.datpubmed))
 }
 
 
