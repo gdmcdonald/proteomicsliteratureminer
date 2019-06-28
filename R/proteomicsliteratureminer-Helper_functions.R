@@ -67,15 +67,6 @@ pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1
             dat.pubmed$Cluster.byMeSH = mesh_clustering(as.character(dat.pubmed$MeSH), file=plot_path )
           }
 
-          # TO assess
-          # if (!is.null(plots.dir)) {
-          #   output_dir <- file.path(plots.dir)
-          #   plot_path = file.path(output_dir, file=paste('plot_dist_mesh', query.idx, '.png', sep=''))
-          #   dat.pubmed$Cluster.byMeSH = mesh_clustering(as.character(dat.pubmed$MeSH), file=plot_path )
-          # }
-
-
-
           dat.query$TotalResults = nrow(dat.pubmed)
 
           # category 0: no synonyms; 1: hits that have reviews has review; 2: hits but do not have reviews; 3: no hits
