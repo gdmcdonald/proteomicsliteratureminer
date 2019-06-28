@@ -9,12 +9,20 @@
 #' df <- openxlsx::readWorkbook(system.file("extdata", "input_uniprot_keywords.xlsx", package="proteomicsliteratureminer"))
 #' pubMedMiner(df, output.file = "potential_marker_pubmed_results.xlsx", , plots.dir = 'plots')
 #' @export
-pubMedMiner <- function(df, output.file = "pubmed_results.xlsx", plots.dir = NULL) {
+pubMedMiner <- function(df, output.file = NULL, plots.dir = NULL) {
   list.datquery = list()
   list.datpubmed = list()
 
   # create progress bar
   pb <- txtProgressBar(min = 0, max = nrow(df), style = 3)
+  
+  if (!is.null(output.file)) {
+    output.file.dir <- dirname(output.file)
+    output_dir <- file.path(output.file.dir)
+    if (!dir.exists(output_dir)) {
+      dir.create(output_dir)
+    }
+  }
 
   for(query.idx in 1:nrow(df)) {
     Sys.sleep(0.1)
@@ -72,8 +80,10 @@ pubMedMiner <- function(df, output.file = "pubmed_results.xlsx", plots.dir = NUL
       openxlsx::insertImage(wb, paste("pubmed result", ii), paste('plot_dist_mesh', ii, '.png', sep=''),
         width=5, height=5, startRow = 3, startCol=20)
   }
-
-  openxlsx::saveWorkbook(wb, output.file, overwrite=T)
+  
+  if (!is.null(output.file)) {
+      openxlsx::saveWorkbook(wb, output.file, overwrite=T)
+  }
 
   invisible(list(summary_results=all.datquery, pubmed_results=list.datpubmed))
 }
