@@ -33,7 +33,8 @@ Depends:
     httr,
     RISmed,
     tm,
-    wordcloud
+    wordcloud,
+    openxlsx
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.0.9000
 LinkingTo:
