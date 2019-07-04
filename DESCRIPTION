@@ -1,5 +1,5 @@
 Package: proteomicsliteratureminer
-Title: Automates retrieval of literature from PubMed for proteomics data using UniProt identifiers and user-defined keyword search.
+Title: Automates retrieval of literature from PubMed for proteomics data using UniProt identifiers and user-defined keyword search
 Version: 0.0.0.9000
 Authors@R:
     c(person(given = "Mark",
@@ -21,14 +21,20 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
-    cluster (>= 2.0.9),
-    httr (>= 1.4.0),
-    openxlsx (>= 4.1.0.1),
+    cluster,
+    httr,
     Rcpp,
-    rentrez (>= 1.2.2),
-    RISmed (>= 2.1.7),
-    tm (>= 0.7.6),
-    wordcloud (>= 2.6)
+    rentrez,
+    RISmed,
+    tm,
+    wordcloud
+Depends:
+    cluster,
+    httr,
+    RISmed,
+    tm,
+    wordcloud,
+    openxlsx
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.0.9000
 LinkingTo:

@@ -19,22 +19,40 @@ knitr::opts_chunk$set(
 Proteomics and genomics discovery experiments generate increasingly large result tables, necessitating more researcher time to covert data into knowledge. Literature review is an important step in this process and can be tedious for large scale experiments. An informed and strategic decision about which biomolecule targets should be pursued for follow-up experiements remains a challenge. The **proteomicsliteratureminer** package contains functions to streamline and automate the retrieval of literature from PubMed based on Uniprot identifiers and a user defined keyword search.
 
 Install **proteomicsliteratureminer** using
-```{r install, eval = FALSE}
-install_github("vrag7458/proteomicsliteratureminer")
+```{r install, results='hide'}
+install.packages(devtools) # only if devtools is not installed
+install_github("Sydney-Informatics-Hub/proteomicsliteratureminer")
 ```
 
-The way of getting a Microsoft Excel file with the Pubmed publication corresponding to the UniProt identifiers is shown by an example below
-```{r proteomicsliteratureminer}
+The literature miner entry function takes as argument a R Datafframe and generates an Excel spreadsheet that has the relevant PubMed query results.
+The package provides a ready to use R dataframe, potentialmarker. This dataframe is loaded when the package is installed and can be used as an argument to the
+pubmedMiner_entry function. To get more information on potentialmarker, run the folllowing R command - 
+```{r Example R Dataframe,results='hide'}
 library(proteomicsliteratureminer)
-pubmedMiner_entry(query.file = "potential_marker.xlsx", output.file = "potential_marker_pubmed_results.xlsx")
+?potentialmarker
 ```
 
-## Vignette Info
-To be filled.
+The way of getting a Microsoft Excel file with the Pubmed publication corresponding to the UniProt identifiers and user-defined keywords is shown byexample below
 
+Ex.1. Using the R data frame provided by the proteomicsliteratureminer package
+```{r read default R dataframe}
+library(proteomicsliteratureminer,results='hide')
+result <- pubmedMiner_entry(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx")
+```
 
+Ex.2. Reading an Excel and converting it to a R dataframe
+```{r read input as Excel spreadsheet,results='hide'}
+library(proteomicsliteratureminer)
+library(openxlsx)
+df <- readWorkbook(system.file("extdata", "input_uniprot_keywords.xlsx", package="proteomicsliteratureminer"))
+result <- pubmedMiner_entry(df, output.file = "potential_marker_pubmed_results.xlsx")
+```
 
 ## Figures
-To be filled.
+Thw algorithm implemented in this package to retrieve the PubMed relevant literature based on UniProt iDs and user defined keyword is depicted in the figure below.
+
+```{r echo = FALSE, out.width = '80%'}
+knitr::include_graphics("LiteratureRetrievalFlow.png")
+```
 
 

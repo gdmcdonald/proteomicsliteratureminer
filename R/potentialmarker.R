@@ -1,0 +1,15 @@
+#' Proteomics Literature retrieval data
+#'
+#' Created by authors of proteomicsliteratureminer package to illustrate a working example for the package.
+#' 2019.
+#'
+#' @source Bowel Cancer and biomarker Research, Kolling Institute, The University of Sydney, Australia.
+#' @format A data frame with 4 rows and 5 variables:
+#' \describe{
+#' \item{UniProtID}{UniProt protein or gene identifiers.}
+#' \item{IDType}{Identifier used to cite UniProtKB entries.}
+#' \item{TaxID}{A ‘taxonomic identifier’,unique identifier assigned by the NCBI to the source organism of the protein.}
+#' \item{Keyword}{User defined keyword, this will be used with the UniProtID to get list of PubMed literature.}
+#' \item{KeywordInTitleOnly}{When set to Yes will look for the keyword in the title of the publication only.}
+#' }
+"potentialmarker"
