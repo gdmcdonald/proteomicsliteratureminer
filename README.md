@@ -58,9 +58,15 @@ Ex.5. Reading an Excel and converting it to a R dataframe
 ``` r
 library(proteomicsliteratureminer)
 library(openxlsx)
+
+# Read in input query excel file
 df <- readWorkbook(system.file("extdata", "input_uniprot_keywords.xlsx", package="proteomicsliteratureminer"))
+# df <- readWorkbook("path/to/my/input_query.xlsx")     # how to read an excel file on your computer
+# df <- read.csv("path/to/my/input_query.csv", stringsAsFactors = F)     # how to read a csv file on your computer
+
+# Query UniProt and PubMed and Return Results
 result <- pubMedMiner(df, output.file = "input_uniprot_keywords_pubmed_results.xlsx", plots.dir = "plots")
 ```
 
 ## Citing
-When using Lproteomicsliteratureminer please cite: Steffen P, Wu J, Hariharan S, Molloy MP, Schluter H, proteomicsliteratureminer A bioinformatics tool for prioritizing biological leads from omics data using literature mining.
+When using `proteomicsliteratureminer` please cite: Steffen P, Wu J, Hariharan S, Molloy MP, Schluter H, proteomicsliteratureminer A bioinformatics tool for prioritizing biological leads from omics data using literature mining.
