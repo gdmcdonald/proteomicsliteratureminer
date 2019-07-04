@@ -230,8 +230,10 @@ plot_stats <- function(dat.pubmed, file='barplotNwordcloud.png') {
 
   all.abstract = paste(dat.pubmed$Abstract, collapse=' ')
 
-  # word cloud of abstracts
-  suppressWarnings({ wcl = try(wordcloud::wordcloud(all.abstract, max.words=200)) })
+  if (nchar(all.abstract) > 0) {
+    # word cloud of abstracts
+    suppressWarnings({ wcl = try(wordcloud::wordcloud(all.abstract, max.words=200)) })
+  }
 
   # barplots of top 20 MeSH
 
