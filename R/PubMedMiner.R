@@ -6,7 +6,7 @@
 #' @return Generates an Excel file \code{output.file} with Pubmed query results using the UniProt identifers and keyword search in \code{query.file}.
 #' @examples
 #' pubMedMiner(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx", plots.dir = 'plots')
-#' df <- openxlsx::readWorkbook(system.file("extdata", "input_uniprot_keywords.xlsx", package="proteomicsliteratureminer"))
+#' df <- openxlsx::readWorkbook(system.file("extdata", "input_uniprot_keywords.xlsx", package="OmixLitMiner"))
 #' pubMedMiner(df, output.file = "potential_marker_pubmed_results.xlsx", , plots.dir = 'plots')
 #' @export
 pubMedMiner <- function(df, output.file = NULL, plots.dir = NULL) {
