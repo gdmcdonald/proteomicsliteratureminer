@@ -67,7 +67,7 @@ df <- readWorkbook("potential_marker_pubmed_input.xlsx")
 result <- pubMedMiner(df, output.file = "input_uniprot_keywords_pubmed_results.xlsx", plots.dir = "plots")
 ```
 
-Ex.6. Reading an Excel and converting it to a R dataframe
+Ex.6. Reading an Excel, reading default Excel input that is provided by OmixLitMiner, and converting it to a R dataframe
 ``` r
 library(OmixLitMiner)
 library(openxlsx)
