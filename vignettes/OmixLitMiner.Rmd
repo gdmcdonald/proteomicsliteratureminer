@@ -19,18 +19,22 @@ knitr::opts_chunk$set(
 Proteomics and genomics discovery experiments generate increasingly large result tables, necessitating more researcher time to covert data into knowledge. Literature review is an important step in this process and can be tedious for large scale experiments. An informed and strategic decision about which biomolecule targets should be pursued for follow-up experiements remains a challenge. The **OmixLitMiner** package contains functions to streamline and automate the retrieval of literature from PubMed based on Uniprot identifiers and a user defined keyword search. The algorith makes use of a ranking system as detailed below - 
 
 **Ranking system**
-The tool assigns the proteins into three main categories (1-3) and an additional Category 0. Category 1 hits are proteins/genes, which show at least one review paper where the synonyms and the selected keywords are found together in the article title, or in the abstract if that option is selected. Category 2 hits are proteins/genes where at least one publication was found, but no review article, in which the synonyms and the selected keywords are both present. Category 3 represents proteins/genes where no publication was found which mentions both the synonyms and the keywords together in the title. Category 0 is used for proteins/genes where the tool could not find any synonyms. This may happen, if the UniProt ID belongs to an isoform or to an entry that is unreviewed (i.e. TrEMBL). The wordclouds that are produced by the algorithm is the frequency of words in the abstracts of each search query.
+The tool assigns the proteins into three main categories (1-3) and an additional Category 0. Category 1 hits are proteins/genes, which show at least one review paper where the synonyms and the selected keywords are found together in the article title, or in the abstract if that option is selected. Category 2 hits are proteins/genes where at least one publication was found, but no review article, in which the synonyms and the selected keywords are both present. Category 3 represents proteins/genes where no publication was found which mentions both the synonyms and the keywords together in the title. Category 0 is used for proteins/genes where the tool could not find any synonyms. This may happen, if the UniProt ID belongs to an isoform or to an entry that is unreviewed (i.e. TrEMBL). 
+
+The wordclouds that are produced by the algorithm is the frequency of words in the abstracts of each search query.
 
 Install **OmixLitMiner** using
-```{r install, results='hide'}
+```{r install devtools, results='hide'}
 install.packages(devtools) # only if devtools is not installed
-install_github("Sydney-Informatics-Hub/OmixLitMiner")
 ```
 
-The literature miner entry function takes as argument a R Datafframe and generates an Excel spreadsheet that has the relevant PubMed query results.
-The package provides a ready to use R dataframe, potentialmarker. This dataframe is loaded when the package is installed and can be used as an argument to the
-pubmedMiner_entry function. To get more information on potentialmarker, run the folllowing R command - 
-```{r Example R Dataframe,results='hide'}
+```{r install OmixLitMiner, results='hide'}
+library(devtools)
+devtoolsinstall_github("Sydney-Informatics-Hub/OmixLitMiner")
+```
+
+The literature miner entry function takes as argument a R Datafframe and generates an Excel spreadsheet that has the relevant PubMed query results. The package provides a ready to use R dataframe, potentialmarker. This dataframe is loaded when the package is installed and can be used as an argument to the pubmedMiner_entry function. To get more information on potentialmarker, run the folllowing R command - 
+```{r Example R Dataframe, results='hide'}
 library(OmixLitMiner)
 ?potentialmarker
 ```
@@ -38,17 +42,17 @@ library(OmixLitMiner)
 The way of getting a Microsoft Excel file with the Pubmed publication corresponding to the UniProt identifiers and user-defined keywords is shown byexample below
 
 Ex.1. Using the R data frame provided by the OmixLitMiner package
-```{r read default R dataframe}
-library(OmixLitMiner,results='hide')
-result <- pubmedMiner_entry(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx")
+```{r read default R dataframe, results='hide'}
+library(OmixLitMiner)
+result <- pubMedMiner(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx")
 ```
 
 Ex.2. Reading an Excel and converting it to a R dataframe
-```{r read input as Excel spreadsheet,results='hide'}
+```{r read input as Excel spreadsheet, results='hide'}
 library(OmixLitMiner)
 library(openxlsx)
 df <- readWorkbook(system.file("extdata", "input_uniprot_keywords.xlsx", package="OmixLitMiner"))
-result <- pubmedMiner_entry(df, output.file = "potential_marker_pubmed_results.xlsx")
+result <- pubMedMiner(df, output.file = "potential_marker_pubmed_results.xlsx")
 ```
 
 Ex.3. Using the R data frame provided by the package, with output spreadsheet specifed and no plots.
@@ -66,7 +70,15 @@ pubMedMiner(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx
 The output spread sheet with the PubMed output will be saved in the current working directory. If an output spread sheet existed, it would be overwritten.
 The images generated by the package will be saved in directory plots in the current working directory. If no plots directory was present, a new plots directory would be created.
 
-Ex.5. Reading an Excel and converting it to a R dataframe
+Ex.5. Reading from an Excel and converting it to a R dataframe. The potential_marker_pubmed_input.xlsx is assumed to be present at the current working directory.
+``` {r results='hide'}
+library(OmixLitMiner)
+library(openxlsx)
+df <- readWorkbook("potential_marker_pubmed_input.xlsx")
+result <- pubMedMiner(df, output.file = "input_uniprot_keywords_pubmed_results.xlsx", plots.dir = "plots")
+```
+
+Ex.6. Reading an Excel, reading default Excel input that is provided by OmixLitMiner, and converting it to a R dataframe
 ``` {r results='hide'}
 library(OmixLitMiner)
 library(openxlsx)
