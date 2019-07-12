@@ -8,7 +8,7 @@ The goal of Omix-Lit-Miner is to streamline the process of literature retrieval 
 
 ## Installation
 
-You can install the released version of proteomicsliteratureminer from [SIH-GIT](https://github.com/Sydney-Informatics-Hub/Omix-Lit-Miner) with:
+You can install the released version of Omix-Lit-Miner from [SIH-GIT](https://github.com/Sydney-Informatics-Hub/Omix-Lit-Miner) with:
 
 ``` r
 install.packages(devtools) # only if devtools is not installed
