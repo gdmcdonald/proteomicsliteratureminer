@@ -58,9 +58,9 @@ Ex.5. Reading an Excel and converting it to a R dataframe
 ``` r
 library(Omix-Lit-Miner)
 library(openxlsx)
-df <- readWorkbook(system.file("extdata", "input_uniprot_keywords.xlsx", package="proteomicsliteratureminer"))
+df <- readWorkbook(system.file("extdata", "input_uniprot_keywords.xlsx", package="Omix-Lit-Miner"))
 result <- pubMedMiner(df, output.file = "input_uniprot_keywords_pubmed_results.xlsx", plots.dir = "plots")
 ```
 
 ## Citing
-When using Omix-Lit-Miner please cite: Steffen P, Wu J, Hariharan S, Molloy MP, Schluter H, proteomicsliteratureminer A bioinformatics tool for prioritizing biological leads from omics data using literature mining.
+When using Omix-Lit-Miner please cite: Steffen P, Wu J, Hariharan S, Molloy MP, Schluter H, Omix-Lit-Miner A bioinformatics tool for prioritizing biological leads from omics data using literature mining.
