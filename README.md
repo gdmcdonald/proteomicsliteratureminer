@@ -4,7 +4,12 @@ OmixLitMiner is a new tool that aims to help researchers reduce time spent on li
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of OmixLitMiner is to streamline the process of literature retrieval and provides result categorisation to assist researchers select appropraite leads for further research.
+The goal of OmixLitMiner is to streamline the process of literature retrieval and provides result categorisation to assist researchers select appropraite leads for further research. The algorithm makes use of a ranking system as detailed below - 
+
+## Ranking system
+The tool assigns the proteins into three main categories (1-3) and an additional Category 0. Category 1 hits are proteins/genes, which show at least one review paper where the synonyms and the selected keywords are found together in the article title, or in the abstract if that option is selected. Category 2 hits are proteins/genes where at least one publication was found, but no review article, in which the synonyms and the selected keywords are both present. Category 3 represents proteins/genes where no publication was found which mentions both the synonyms and the keywords together in the title. Category 0 is used for proteins/genes where the tool could not find any synonyms. This may happen, if the UniProt ID belongs to an isoform or to an entry that is unreviewed (i.e. TrEMBL). 
+
+The wordclouds that are produced by the algorithm is the frequency of words in the abstracts of each search query.
 
 ## Installation
 
