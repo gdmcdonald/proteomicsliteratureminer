@@ -83,5 +83,3 @@ result <- omixLitMiner(df, output.file = "input_uniprot_keywords_pubmed_results.
 
 ## Citing
 When using OmixLitMiner please cite: Steffen P, Wu J, Hariharan S, Molloy MP, Schluter H, OmixLitMiner A bioinformatics tool for prioritizing biological leads from omics data using literature mining.
-
-
