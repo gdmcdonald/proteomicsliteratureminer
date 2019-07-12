@@ -11,5 +11,5 @@ Bowel Cancer and Biomarker Research, Kolling Institute, The University of Sydney
 }
 \description{
 The OmixLitMiner package provides functions:
-pubMedMiner
+omixLitMiner
 }
