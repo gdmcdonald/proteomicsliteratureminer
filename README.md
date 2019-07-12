@@ -71,9 +71,17 @@ Ex.6. Reading an Excel, reading default Excel input that is provided by OmixLitM
 ``` r
 library(OmixLitMiner)
 library(openxlsx)
-df <- readWorkbook(system.file("extdata", "input_uniprot_keywords.xlsx", package="OmixLitMiner"))
+
+# Read in input query excel file
+df <- readWorkbook(system.file("extdata", "input_uniprot_keywords.xlsx", package="OmixLitMiner")) #read demo data from package
+# df <- readWorkbook("path/to/my/input_query.xlsx")     # how to read an excel file on your computer
+# df <- read.csv("path/to/my/input_query.csv", stringsAsFactors = F)     # how to read a csv file on your computer
+
+# Query UniProt and PubMed and Return Results
 result <- omixLitMiner(df, output.file = "input_uniprot_keywords_pubmed_results.xlsx", plots.dir = "plots")
 ```
 
 ## Citing
 When using OmixLitMiner please cite: Steffen P, Wu J, Hariharan S, Molloy MP, Schluter H, OmixLitMiner A bioinformatics tool for prioritizing biological leads from omics data using literature mining.
+
+
