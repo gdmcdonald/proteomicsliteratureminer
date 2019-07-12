@@ -19,7 +19,7 @@ Bowel Cancer and biomarker Research, Kolling Institute, The University of Sydney
 potentialmarker
 }
 \description{
-Created by authors of proteomicsliteratureminer package to illustrate a working example for the package.
+Created by authors of OmixlitMiner package to illustrate a working example for the package.
 2019.
 }
 \keyword{datasets}

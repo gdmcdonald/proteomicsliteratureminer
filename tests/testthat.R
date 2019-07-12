@@ -1,4 +1,4 @@
 library(testthat)
-library(proteomicsliteratureminer)
+library(OmixLitMiner)
 
-test_check("proteomicsliteratureminer")
+test_check("OmixLitMiner")
