@@ -30,7 +30,7 @@ install.packages(devtools) # only if devtools is not installed
 
 ```{r install OmixLitMiner, results='hide'}
 library(devtools)
-devtoolsinstall_github("Sydney-Informatics-Hub/OmixLitMiner")
+install_github("Sydney-Informatics-Hub/OmixLitMiner")
 ```
 
 The literature miner entry function takes as argument a R Datafframe and generates an Excel spreadsheet that has the relevant PubMed query results. The package provides a ready to use R dataframe, potentialmarker. This dataframe is loaded when the package is installed and can be used as an argument to the pubmedMiner_entry function. To get more information on potentialmarker, run the folllowing R command - 
