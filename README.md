@@ -1,72 +1,87 @@
-# proteomicsliteratureminer
-proteomicsliteratureminer is a new tool that aims to help researchers reduce time spent on literature research post analysis and streamline the decision about which proteins or genes are the most interesting and most promising for follow-up experiments.
+# OmixLitMiner
+OmixLitMiner is a new tool that aims to help researchers reduce time spent on literature research post analysis and streamline the decision about which proteins or genes are the most interesting and most promising for follow-up experiments.
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of proteomicsliteratureminer is to streamline the process of literature retrieval and provides result categorisation to assist researchers select appropraite leads for further research.
+The goal of OmixLitMiner is to streamline the process of literature retrieval and provides result categorisation to assist researchers select appropraite leads for further research. The algorithm makes use of a ranking system as detailed below - 
+
+## Ranking system
+The tool assigns the proteins into three main categories (1-3) and an additional Category 0. Category 1 hits are proteins/genes, which show at least one review paper where the synonyms and the selected keywords are found together in the article title, or in the abstract if that option is selected. Category 2 hits are proteins/genes where at least one publication was found, but no review article, in which the synonyms and the selected keywords are both present. Category 3 represents proteins/genes where no publication was found which mentions both the synonyms and the keywords together in the title. Category 0 is used for proteins/genes where the tool could not find any synonyms. This may happen, if the UniProt ID belongs to an isoform or to an entry that is unreviewed (i.e. TrEMBL). 
+
+The wordclouds that are produced by the algorithm is the frequency of words in the abstracts of each search query.
 
 ## Installation
 
-You can install the released version of proteomicsliteratureminer from [SIH-GIT](https://github.com/Sydney-Informatics-Hub/proteomicsliteratureminer) with:
+You can install the released version of OmixLitMiner from [SIH-GIT](https://github.com/Sydney-Informatics-Hub/OmixLitMiner) with:
 
 ``` r
 install.packages(devtools) # only if devtools is not installed
-devtools::install_github("Sydney-Informatics-Hub/proteomicsliteratureminer")
+devtools::install_github("Sydney-Informatics-Hub/OmixLitMiner")
 ```
 
 ## Example
 
-Some ways of using the proteomicsliteratureminer package is shown below.
+Some ways of using the OmixLitMiner package is shown below.
 potentialmarker is a R dataframe that is part of the R package, for description of its contents, run the following R command
 ``` r
-library(proteomicsliteratureminer)
+library(OmixLitMiner)
 ?potentialmarker
 ```
 
-Ex.1. Using the R data frame provided by the package, no output spreadsheet and plots specified, the object returned from pubMedMiner() is not assigned to any variable.
+Ex.1. Using the R data frame provided by the package, no output spreadsheet and plots specified, the object returned from omixLitMiner() is not assigned to any variable.
 ``` r
-library(proteomicsliteratureminer)
-result <- pubMedMiner(potentialmarker)
+library(OmixLitMiner)
+result <- omixLitMiner(potentialmarker)
 ```
 The result variable has 2 list elements - 
 1. summary_results - Summarizes the query results 
 2. pubmed_results - Summarizes the PubMed results based on the UniProt Identifiers and key words specified by the user
 
-Ex.2. Using the R data frame provided by the package, with output spreadsheet specifed and no plots, the object returned from pubMedMiner() is not assigned to any variable.
+Ex.2. Using the R data frame provided by the package, with output spreadsheet specifed and no plots, the object returned from omixLitMiner() is not assigned to any variable.
 ``` r
-library(proteomicsliteratureminer)
-pubMedMiner(potentialmarker)
+library(OmixLitMiner)
+omixLitMiner(potentialmarker)
 ```
 
 Ex.3. Using the R data frame provided by the package, with output spreadsheet specifed and no plots.
 ``` r
-library(proteomicsliteratureminer)
-pubMedMiner(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx")
+library(OmixLitMiner)
+omixLitMiner(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx")
 ```
 The output spread sheet with the PubMed output will be saved in the current working directory.
 
-Ex.4. Using the R data frame provided by the package, with output spreadsheet specifed and no plots, the object returned from pubMedMiner() is not assigned to any variable.
+Ex.4. Using the R data frame provided by the package, with output spreadsheet specifed and no plots, the object returned from omixLitMiner() is not assigned to any variable.
 ``` r
-library(proteomicsliteratureminer)
-pubMedMiner(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx", plots.dir = "plots")
+library(OmixLitMiner)
+omixLitMiner(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx", plots.dir = "plots")
 ```
 The output spread sheet with the PubMed output will be saved in the current working directory. If an output spread sheet existed, it would be overwritten.
 The images generated by the package will be saved in directory plots in the current working directory. If no plots directory was present, a new plots directory would be created.
 
-Ex.5. Reading an Excel and converting it to a R dataframe
+Ex.5. Reading from an Excel and converting it to a R dataframe. The potential_marker_pubmed_input.xlsx is assumed to be present at the current working directory.
 ``` r
-library(proteomicsliteratureminer)
+library(OmixLitMiner)
+library(openxlsx)
+df <- readWorkbook("potential_marker_pubmed_input.xlsx")
+result <- omixLitMiner(df, output.file = "input_uniprot_keywords_pubmed_results.xlsx", plots.dir = "plots")
+```
+
+Ex.6. Reading an Excel, reading default Excel input that is provided by OmixLitMiner, and converting it to a R dataframe
+``` r
+library(OmixLitMiner)
 library(openxlsx)
 
 # Read in input query excel file
-df <- readWorkbook(system.file("extdata", "input_uniprot_keywords.xlsx", package="proteomicsliteratureminer"))
+df <- readWorkbook(system.file("extdata", "input_uniprot_keywords.xlsx", package="OmixLitMiner")) #read demo data from package
 # df <- readWorkbook("path/to/my/input_query.xlsx")     # how to read an excel file on your computer
 # df <- read.csv("path/to/my/input_query.csv", stringsAsFactors = F)     # how to read a csv file on your computer
 
 # Query UniProt and PubMed and Return Results
-result <- pubMedMiner(df, output.file = "input_uniprot_keywords_pubmed_results.xlsx", plots.dir = "plots")
+result <- omixLitMiner(df, output.file = "input_uniprot_keywords_pubmed_results.xlsx", plots.dir = "plots")
 ```
 
 ## Citing
-When using `proteomicsliteratureminer` please cite: Steffen P, Wu J, Hariharan S, Molloy MP, Schluter H, proteomicsliteratureminer A bioinformatics tool for prioritizing biological leads from omics data using literature mining.
+When using OmixLitMiner please cite: Steffen P, Wu J, Hariharan S, Molloy MP, Schluter H, OmixLitMiner A bioinformatics tool for prioritizing biological leads from omics data using literature mining.
+
+

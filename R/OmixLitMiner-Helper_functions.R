@@ -11,7 +11,7 @@
 #' @importFrom utils setTxtProgressBar
 #' @importFrom utils txtProgressBar
 
-pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1, plots.dir) {
+omix_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1, plots.dir) {
   fields = "TIAB"
 
   if(ti.only=="Yes") fields = "TI"
