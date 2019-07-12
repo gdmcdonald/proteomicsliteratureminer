@@ -19,8 +19,3 @@ Generates an Excel file \code{output.file} with Pubmed query results using the U
 \description{
 Generates a list of PubMed results based on a UniProt ID and a user-defined keyword.
 }
-\examples{
-pubMedMiner(potentialmarker, output.file = "potential_marker_pubmed_results.xlsx", plots.dir = 'plots')
-df <- openxlsx::readWorkbook(system.file("extdata", "input_uniprot_keywords.xlsx", package="OmixLitMiner"))
-pubMedMiner(df, output.file = "potential_marker_pubmed_results.xlsx", , plots.dir = 'plots')
-}
