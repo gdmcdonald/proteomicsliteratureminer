@@ -76,18 +76,21 @@ omixLitMiner <- function(df, output.file = NULL, plots.dir = NULL) {
     openxlsx::writeData(wb, paste("pubmed result", ii), list.datpubmed[[ii]], startRow=4)
     
     # cat(paste(plots.dir, 'barplotNwordcloud', ii, '.png', sep=''))
-    wordcloudpath <- file.path(plots.dir, 'barplotNwordcloud', ii, '.png')
-    # cat('Samtajee')
-    # cat(wordcloudpath)
-    # print('\n')
-    myStringVariabel <- paste(wordcloudpath, "\n", sep="");
-    cat(myStringVariabel)
+    # wordcloudpath <- file.path(plots.dir, 'barplotNwordcloud', ii, '.png')
+    # # cat('Samtajee')
+    # # cat(wordcloudpath)
+    # # print('\n')
+    # myStringVariabel <- paste(wordcloudpath, "\n", sep="");
+    # cat(myStringVariabel)
     
     
-    print(myStringVariabel)
-    # if(file.exists(paste(plots.dir, 'barplotNwordcloud', ii, '.png', sep='') ) )
-    if(file.exists(myStringVariabel ) )
-      openxlsx::insertImage(wb, myStringVariabel,
+    
+    if(file.exists(paste(plots.dir, 'barplotNwordcloud', ii, '.png', sep='') ) )
+    # if(file.exists(myStringVariabel ) )
+      # openxlsx::insertImage(wb, myStringVariabel,
+      #   width=5, height=8, startRow = 3, startCol=12)
+    
+      insertImage(wb, paste("pubmed result", ii), paste(plots.dir, 'barplotNwordcloud', ii, '.png', sep=''), 
         width=5, height=8, startRow = 3, startCol=12)
 
     if(file.exists(paste(plots.dir, 'plot_dist_mesh', ii, '.png', sep='') ) )
