@@ -15,6 +15,7 @@
 
 omix_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1, plots.dir) {
   fields = "TIAB"
+  synonyms <- NULL
 
   if(ti.only=="Yes") fields = "TI"
 

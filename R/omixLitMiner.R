@@ -40,6 +40,7 @@ omixLitMiner <- function(df, output.file = NULL, plots.dir = NULL) {
       list.datpubmed[[query.idx]] = pd.res$dat.pubmed
 
     } else {
+      synonyms <- NULL
       list.datquery[[query.idx]] = data.frame('UniProtID'=UniProtID, 'GeneID' = NA, 'TaxID'=taxid, 'Synonyms' = paste(synonyms, collapse=','),
         'Keywords' = keyword, 'KeywordInTitleOnly'=ti.only, 'TotalResults'=0,
         'Category' = 3, 'False' = 0, 'PubmedQuery'=NA)
