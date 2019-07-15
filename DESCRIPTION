@@ -32,8 +32,6 @@ Depends:
     openxlsx
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-LinkingTo:
-    Rcpp
 Suggests:
     testthat,
     knitr,
