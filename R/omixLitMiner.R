@@ -74,13 +74,13 @@ omixLitMiner <- function(df, output.file = NULL, plots.dir = NULL) {
     openxlsx::writeData(wb, paste("pubmed result", ii), list.datpubmed[[ii]], startRow=4)
     
     output_plots_dir <- file.path(plots.dir)
-    plot_path_wordcloud = file.path(output_dir, file=paste('barplotNwordcloud', ii, '.png', sep=''))
+    plot_path_wordcloud = file.path(output_plots_dir, file=paste('barplotNwordcloud', ii, '.png', sep=''))
     
     if(file.exists(plot_path_wordcloud))
       insertImage(wb, paste("pubmed result", ii), plot_path_wordcloud, 
         width=5, height=8, startRow = 3, startCol=12)
     
-    plot_path_distmesh = file.path(output_dir, file=paste('plot_dist_mesh', ii, '.png', sep=''))
+    plot_path_distmesh = file.path(output_plots_dir, file=paste('plot_dist_mesh', ii, '.png', sep=''))
     if(file.exists(plot_path_distmesh))
       openxlsx::insertImage(wb, paste("pubmed result", ii), plot_path_distmesh,
         width=5, height=5, startRow = 3, startCol=20)
