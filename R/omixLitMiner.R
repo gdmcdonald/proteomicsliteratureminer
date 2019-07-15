@@ -12,7 +12,6 @@
 omixLitMiner <- function(df, output.file = NULL, plots.dir = NULL) {
   list.datquery = list()
   list.datpubmed = list()
-  print(plots.dir)
 
   # create progress bar
   pb <- txtProgressBar(min = 0, max = nrow(df), style = 3)
@@ -74,16 +73,16 @@ omixLitMiner <- function(df, output.file = NULL, plots.dir = NULL) {
     openxlsx::writeData(wb, paste("pubmed result", ii), list.datquery[[ii]])
     openxlsx::writeData(wb, paste("pubmed result", ii), list.datpubmed[[ii]], startRow=4)
     
-    if(file.exists(paste(plots.dir, '/', 'barplotNwordcloud', ii, '.png', sep='') ) )
-    # if(file.exists(myStringVariabel ) )
-      # openxlsx::insertImage(wb, myStringVariabel,
-      #   width=5, height=8, startRow = 3, startCol=12)
+    output_plots_dir <- file.path(plots.dir)
+    plot_path_wordcloud = file.path(output_dir, file=paste('barplotNwordcloud', ii, '.png', sep=''))
     
-      insertImage(wb, paste("pubmed result", ii), paste(plots.dir, '/', 'barplotNwordcloud', ii, '.png', sep=''), 
+    if(file.exists(plot_path))
+      insertImage(wb, paste("pubmed result", ii), plot_path_wordcloud, 
         width=5, height=8, startRow = 3, startCol=12)
-
-    if(file.exists(paste(plots.dir, 'plot_dist_mesh', ii, '.png', sep='') ) )
-      openxlsx::insertImage(wb, paste("pubmed result", ii), paste(plots.dir, 'plot_dist_mesh', ii, '.png', sep=''),
+    
+    plot_path_distmesh = file.path(output_dir, file=paste('plot_dist_mesh', ii, '.png', sep=''))
+    if(file.exists(plot_path_distmesh))
+      openxlsx::insertImage(wb, paste("pubmed result", ii), plot_path_distmesh,
         width=5, height=5, startRow = 3, startCol=20)
   }
   
