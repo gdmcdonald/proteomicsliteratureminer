@@ -72,7 +72,7 @@ omixLitMiner <- function(df, output.file = NULL, plots.dir = NULL) {
     openxlsx::addWorksheet(wb, sheetName=paste("pubmed result", ii) )
     openxlsx::writeData(wb, paste("pubmed result", ii), list.datquery[[ii]])
     openxlsx::writeData(wb, paste("pubmed result", ii), list.datpubmed[[ii]], startRow=4)
-
+    print(paste(plots.dir, 'barplotNwordcloud', ii, '.png', sep=''))
     if(file.exists(paste(plots.dir, 'barplotNwordcloud', ii, '.png', sep='') ) )
       openxlsx::insertImage(wb, paste("pubmed result", ii), paste('barplotNwordcloud', ii, '.png', sep=''),
         width=5, height=8, startRow = 3, startCol=12)
