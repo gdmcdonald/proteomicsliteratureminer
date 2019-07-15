@@ -29,11 +29,6 @@ Imports:
     tm,
     wordcloud
 Depends:
-    cluster,
-    httr,
-    RISmed,
-    tm,
-    wordcloud,
     openxlsx
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
