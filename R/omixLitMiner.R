@@ -13,6 +13,7 @@ omixLitMiner <- function(df, output.file = NULL, plots.dir = NULL) {
   list.datquery = list()
   list.datpubmed = list()
   cat(plots.dir)
+  print('BOL HARI......')
 
   # create progress bar
   pb <- txtProgressBar(min = 0, max = nrow(df), style = 3)
