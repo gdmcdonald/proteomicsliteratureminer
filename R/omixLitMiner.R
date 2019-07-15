@@ -84,9 +84,10 @@ omixLitMiner <- function(df, output.file = NULL, plots.dir = NULL) {
     cat(myStringVariabel)
     
     
-    
-    if(file.exists(paste(plots.dir, 'barplotNwordcloud', ii, '.png', sep='') ) )
-      openxlsx::insertImage(wb, paste("pubmed result", ii), paste('barplotNwordcloud', ii, '.png', sep=''),
+    print(myStringVariabel)
+    # if(file.exists(paste(plots.dir, 'barplotNwordcloud', ii, '.png', sep='') ) )
+    if(file.exists(myStringVariabel ) )
+      openxlsx::insertImage(wb, myStringVariabel,
         width=5, height=8, startRow = 3, startCol=12)
 
     if(file.exists(paste(plots.dir, 'plot_dist_mesh', ii, '.png', sep='') ) )
