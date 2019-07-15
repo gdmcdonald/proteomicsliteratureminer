@@ -76,7 +76,7 @@ omixLitMiner <- function(df, output.file = NULL, plots.dir = NULL) {
     output_plots_dir <- file.path(plots.dir)
     plot_path_wordcloud = file.path(output_dir, file=paste('barplotNwordcloud', ii, '.png', sep=''))
     
-    if(file.exists(plot_path))
+    if(file.exists(plot_path_wordcloud))
       insertImage(wb, paste("pubmed result", ii), plot_path_wordcloud, 
         width=5, height=8, startRow = 3, startCol=12)
     
