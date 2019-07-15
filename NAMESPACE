@@ -2,6 +2,7 @@
 
 export(omixLitMiner)
 importFrom(grDevices,dev.off)
+importFrom(grDevices,png)
 importFrom(graphics,axis)
 importFrom(graphics,barplot)
 importFrom(graphics,layout)

@@ -10,6 +10,7 @@
 #' @importFrom stats na.omit
 #' @importFrom utils setTxtProgressBar
 #' @importFrom utils txtProgressBar
+#' @importFrom grDevices png
 
 omix_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1, plots.dir) {
   fields = "TIAB"
