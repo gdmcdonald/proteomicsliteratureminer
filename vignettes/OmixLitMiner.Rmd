@@ -105,7 +105,8 @@ Reading from an Excel and converting it to a R dataframe. The Input_uniprot_Keyw
 ```{r eval = FALSE}
 library(OmixLitMiner)
 library(openxlsx)
-df <- readWorkbook("Input_uniprot_Keywords.xlsx")
+df <- readWorkbook("Input_uniprot_Keywords.xlsx") # how to read an excel file on your computer
+# df <- read.csv("path/to/my/input_query.csv", stringsAsFactors = F)     # how to read a csv file on your computer
 result <- omixLitMiner(df, output.file = "input_uniprot_keywords_pubmed_results.xlsx", plots.dir = "plots")
 ```
 
