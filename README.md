@@ -80,5 +80,8 @@ df <- readWorkbook(system.file("extdata", "input_uniprot_keywords.xlsx", package
 result <- omixLitMiner(df, output.file = "input_uniprot_keywords_pubmed_results.xlsx", plots.dir = "plots")
 ```
 
+## Searching with gene names instead of Uniprot Identifiers
+For searching with gene names instead of UniProt identifiers please change the value in the column `IDType` in the input file to `Gene` instead of `Accession`.
+
 ## Citing
 When using OmixLitMiner please cite: Steffen P, Wu J, Hariharan S, Molloy MP, Schluter H, OmixLitMiner A bioinformatics tool for prioritizing biological leads from omics data using literature mining.
