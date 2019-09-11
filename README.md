@@ -16,9 +16,11 @@ The wordclouds that are produced by the algorithm is the frequency of words in t
 You can install the released version of OmixLitMiner from [SIH-GIT](https://github.com/Sydney-Informatics-Hub/OmixLitMiner) with:
 
 ``` r
-install.packages(devtools) # only if devtools is not installed
+install.packages("devtools") # only if devtools is not installed
 devtools::install_github("Sydney-Informatics-Hub/OmixLitMiner")
 ```
+
+If RTools is not installed prior to downloading OmixLitMiner, you will be prompted to install it. Please do so. After installation of RTools is done run `devtools::install_github("Sydney-Informatics-Hub/OmixLitMiner")` again so that the package is downloaded.
 
 ## Example
 
