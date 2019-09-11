@@ -20,7 +20,9 @@ install.packages("devtools") # only if devtools is not installed
 devtools::install_github("Sydney-Informatics-Hub/OmixLitMiner")
 ```
 
-If RTools is not installed prior to downloading OmixLitMiner, you will be prompted to install it. Please do so. After installation of RTools is done run `devtools::install_github("Sydney-Informatics-Hub/OmixLitMiner")` again so that the package is downloaded.
+If RTools is not installed prior to downloading OmixLitMiner, you will be prompted to install it. Please do so.
+If you are not prompted to install it, please dowload and install it from here: [RTools](https://cran.r-project.org/bin/windows/Rtools/).
+After installation of RTools is done run `devtools::install_github("Sydney-Informatics-Hub/OmixLitMiner")` again so that the package is downloaded.
 
 ## Example
 
