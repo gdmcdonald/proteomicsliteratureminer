@@ -89,7 +89,8 @@ omixLitMiner <- function(df, output.file = NULL, plots.dir = 'omixLitMinerPlots'
   if (!is.null(output.file)) {
       openxlsx::saveWorkbook(wb, output.file, overwrite=T)
   }
-
+  close(pb)
+  
   invisible(list(summary_results=all.datquery, pubmed_results=list.datpubmed))
 }
 
