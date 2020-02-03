@@ -84,7 +84,7 @@ df <- readWorkbook(system.file("extdata", "input_uniprot_keywords.xlsx", package
 result <- omixLitMiner(df, output.file = "input_uniprot_keywords_pubmed_results.xlsx", plots.dir = "plots")
 ```
 
-A Standard Operating Procedure guide for installing R and running OmixLitMiner is available at [this link](https://github.com/Sydney-Informatics-Hub/OmixLitMiner/blob/master/OmixLitMiner SOP.pdf)
+A Standard Operating Procedure guide for installing R and running OmixLitMiner is available at [this link](https://github.com/Sydney-Informatics-Hub/OmixLitMiner/blob/master/OmixLitMiner%20SOP.pdf)
 
 ## Searching with gene names instead of Uniprot Identifiers
 For searching with gene names instead of UniProt identifiers please change the value in the column `IDType` in the input file to `Gene` instead of `Accession`.
