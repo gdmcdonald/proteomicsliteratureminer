@@ -10,9 +10,12 @@
 #' @importFrom stats na.omit
 #' @importFrom utils setTxtProgressBar
 #' @importFrom utils txtProgressBar
+#' @importFrom grDevices png
+#' @import RISmed cluster httr openxlsx tm wordcloud
 
-pubmed_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1, plots.dir) {
+omix_miner <- function(UniProtID, IDType, taxid, keyword, ti.only, query.idx=1, plots.dir) {
   fields = "TIAB"
+  synonyms <- NULL
 
   if(ti.only=="Yes") fields = "TI"
 
