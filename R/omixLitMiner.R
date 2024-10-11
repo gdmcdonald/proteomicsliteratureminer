@@ -30,7 +30,7 @@ omixLitMiner <- function(df, output.file = NULL, plots.dir = 'omixLitMinerPlots'
     IDType = df[query.idx, "IDType"]
     taxid = df[query.idx, 'TaxID']
     keyword =  df[query.idx, 'Keyword']
-    ti.only = df[query.idx,5]
+    ti.only = df[query.idx, 'KeywordInTitleOnly']
 
     pd.res <- try(omix_miner(UniProtID, IDType, taxid, keyword, ti.only, query.idx=query.idx, plots.dir))
 
